@@ -1,15 +1,39 @@
 import styles from "./app.module.css";
-import { data } from "../../utils/data";
+import React from "react";
+import AppHeader from "../app-header/app-header";
+import Main from "../main/main";
+import { useEffect, useState } from "react";
 
 function App() {
+  const [cards, setCards] = useState([]);
+
+  const getCard = () => {
+    fetch("https://norma.nomoreparties.space/api/ingredients")
+      .then((res) => res.json())
+      .then((data) => {
+        console.dir(data);
+        console.log("111111");
+        setCards(data.data)})
+
+      .catch((err) => console.log(err));
+  };
+   
+  React.useEffect(() => {
+   console.dir(cards);
+}, [cards]);
+
+ 
+  useEffect(() => {
+    getCard();
+    
+  }, []);
+
+
+
   return (
     <div className={styles.app}>
-      <pre style={{
-      	margin: "auto",
-      	fontSize: "1.5rem"
-      }}>
-      	Измените src/components/app/app.jsx и сохраните для обновления.
-      </pre>
+      <AppHeader />
+      <Main cards={cards} />
     </div>
   );
 }

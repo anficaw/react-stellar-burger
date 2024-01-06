@@ -1,0 +1,14 @@
+.linkHeader {
+    width: auto;
+    height: 24px;
+    display: flex;
+    flex-direction: row;
+    color: rgba(242, 242, 243, 1);
+    padding-top: 16px;
+    padding-bottom: 16px;
+    padding-left: 20px;
+    padding-right: 16px;
+    border-radius: 40px;
+    border: 1px;
+    }
+
