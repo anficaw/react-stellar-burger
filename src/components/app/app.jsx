@@ -3,32 +3,27 @@ import React from "react";
 import AppHeader from "../app-header/app-header";
 import Main from "../main/main";
 import { useEffect, useState } from "react";
+import {sait} from "../../utils/data"
 
 function App() {
   const [cards, setCards] = useState([]);
 
   const getCard = () => {
-    fetch("https://norma.nomoreparties.space/api/ingredients")
+     
+    fetch(sait)
       .then((res) => res.json())
       .then((data) => {
-        console.dir(data);
-        console.log("111111");
-        setCards(data.data)})
-
+         
+        setCards(data.data);
+      })
+ 
       .catch((err) => console.log(err));
   };
-   
-  React.useEffect(() => {
-   console.dir(cards);
-}, [cards]);
 
- 
   useEffect(() => {
     getCard();
-    
+     
   }, []);
-
-
 
   return (
     <div className={styles.app}>
