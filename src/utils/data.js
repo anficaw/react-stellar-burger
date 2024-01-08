@@ -210,3 +210,5 @@ export const data = [
      "__v":0
   }
 ]
+
+export const sait= "https://norma.nomoreparties.space/api/ingredients";
