@@ -5,12 +5,24 @@ import TitleList from "../title-list/title-list";
 import Modal from "../modal/modal";
 import IngredientDetails from "../ingredient-details/ingredient-details";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
+import { useDispatch, useSelector } from "react-redux";
+import { getIngradientsSelector, getNewBurgerSelector} from "../store/action-selector";
+import { useDrop } from "react-dnd";
 
-function BurgerIngredients({ cards }) {
+
+function BurgerIngredients() {
+
+
   const [isModalOpen, setModalOpen] = useState(false);
-  const [iscardOpen, setCardOpen] = useState({});
-  const [current, setCurrent] = React.useState("one");
+  const [ingredientopen, setIngredientopen] = useState();
 
+  const [current, setCurrent] = useState("one");
+
+  const cards = useSelector(getIngradientsSelector);
+
+  const dispatch = useDispatch();
+
+    
   const onClose = () => {
     setModalOpen(false);
   };
@@ -21,16 +33,12 @@ function BurgerIngredients({ cards }) {
 
   const onChoose = (one) => {
     onOpen();
-    setCardOpen(one);
+    setIngredientopen(one);
+    /*dispatch({
+      type: addIng,
+      payload: one,
+    });*/
   };
-
-  let count = 1;
-  {
-    cards.map((item) => {
-      item.num = count;
-      count = count + 1;
-    });
-  }
 
   return (
     <section className={styles.burgerIngredients}>
@@ -53,13 +61,18 @@ function BurgerIngredients({ cards }) {
         <TitleList name="Булки" />
         <ul className={styles.components}>
           {cards.map((item) => {
-            if (item.type === "bun") {
+            if (item.ingradient.type === "bun") {
               return (
-                <li className={styles.component} key={item._id}>
+                <li
+                  className={styles.component}
+                  key={item.ingradient._id}
+                   
+                >
                   <BurgerIngredient
                     card={item}
-                    key={item._id}
+                    key={item.ingradient._id}
                     detalesingradient={onChoose}
+                    
                   />
                 </li>
               );
@@ -69,12 +82,16 @@ function BurgerIngredients({ cards }) {
         <TitleList name="Соусы" />
         <ul className={styles.components}>
           {cards.map((item) => {
-            if (item.type === "sauce") {
+            if (item.ingradient.type === "sauce") {
               return (
-                <li className={styles.component} key={item._id}>
+                <li
+                  className={styles.component}
+                  key={item.ingradient._id}
+                   
+                >
                   <BurgerIngredient
                     card={item}
-                    key={item._id}
+                    key={item.ingradient._id}
                     detalesingradient={onChoose}
                   />
                 </li>
@@ -85,12 +102,16 @@ function BurgerIngredients({ cards }) {
         <TitleList name="Начинки" />
         <ul className={styles.components}>
           {cards.map((item) => {
-            if (item.type === "main") {
+            if (item.ingradient.type === "main") {
               return (
-                <li className={styles.component} key={item._id}>
+                <li
+                  className={styles.component}
+                  key={item.ingradient._id}
+                   
+                >
                   <BurgerIngredient
                     card={item}
-                    key={item._id}
+                    key={item.ingradient._id}
                     detalesingradient={onChoose}
                   />
                 </li>
@@ -101,7 +122,7 @@ function BurgerIngredients({ cards }) {
       </div>
       {isModalOpen && (
         <Modal onClose={onClose}>
-          <IngredientDetails ingradient={iscardOpen} />
+          <IngredientDetails ingradient={ingredientopen}/>
         </Modal>
       )}
     </section>

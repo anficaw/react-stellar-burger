@@ -1,7 +1,13 @@
 import React from "react";
 import styles from "./ingredient-details.module.css";
+import { useSelector } from "react-redux";
+import { getIngradientSelector } from "../store/action-selector";
 
-function IngredientDetails({ ingradient }) {
+
+function IngredientDetails({ingradient}) {
+  
+  /*const ingradient = useSelector(getIngradientSelector);*/
+
   return (
     <section className={styles.ingredientdetails}>
       <p className=" mt-10 mr-10 text text_type_main-large">

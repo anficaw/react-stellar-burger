@@ -1,35 +1,48 @@
-import React, { useState } from "react";
 import styles from "./burger-ingredient.module.css";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
-import Modal from "../modal/modal";
-import IngredientDetails from "../ingredient-details/ingredient-details";
+import { useDispatch } from "react-redux";
+
+import { useDrag } from "react-dnd";
+import { addIng } from "../store/ingradient-slice";
 
 function BurgerIngredient({ card, detalesingradient }) {
-  const [isModalOpen, setModalOpen] = useState(false);
-  const onClose = () => {
-    setModalOpen(false);
-  };
 
-  const onOpen = () => {
-    setModalOpen(true);
-  };
-  let number = 1;
+  const dispatch = useDispatch();
+
+  const [{ isDragStart }, dragRef] = useDrag({
+    type: "ing",
+    item: card,
+    
+  });
+
   return (
     <div
       className={styles.burgerIngredient}
-      onClick={() => detalesingradient(card)}
+      onClick={() => detalesingradient(card.ingradient)}
+      ref={dragRef}
     >
-      <img className={styles.image} alt={card.name} src={card.image} />
+      <img
+        className={styles.image}
+        alt={card.ingradient.name}
+        src={card.ingradient.image}
+        draggable="false"
+
+      />
       <div className={styles.imageprice}>
-        <div className=" mr-2 text text_type_digits-default">{card.price}</div>
+        <div className=" mr-2 text text_type_digits-default">
+          {card.ingradient.price}
+        </div>
         <CurrencyIcon />
       </div>
       <div className={`text text_type_main-default ${styles.title}`}>
-        {card.name}
+        {card.ingradient.name}
       </div>
-      <div className={`text text_type_digits-default ${styles.nom}`}>
-        {card.num}
-      </div>
+
+      {card.number != 0 && (
+        <div className={`text text_type_digits-default ${styles.nom}`}>
+          {card.number}
+        </div>
+      )}
     </div>
   );
 }

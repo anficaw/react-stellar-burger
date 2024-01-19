@@ -9,6 +9,8 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 
 function AppHeader() {
+  
+
   return (
     <header className={styles.appheader}>
       <div className={styles.headerblockleft}>

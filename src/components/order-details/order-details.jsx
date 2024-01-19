@@ -19,4 +19,5 @@ function OrderDetails({ number }) {
     </section>
   );
 }
+
 export default OrderDetails;

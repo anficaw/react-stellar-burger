@@ -1,34 +1,28 @@
 import styles from "./app.module.css";
-import React from "react";
+ 
 import AppHeader from "../app-header/app-header";
 import Main from "../main/main";
-import { useEffect, useState } from "react";
-import {sait} from "../../utils/data"
+import { useEffect } from "react";
 
-function App() {
-  const [cards, setCards] = useState([]);
 
-  const getCard = () => {
-     
-    fetch(sait)
-      .then((res) => res.json())
-      .then((data) => {
-         
-        setCards(data.data);
-      })
+import { useDispatch } from "react-redux";
+
+import {fetchList} from "../store/ingradients-slice";
+
  
-      .catch((err) => console.log(err));
-  };
+function App() {
+  
+  const dispatch = useDispatch()
+    useEffect (() => {
+    dispatch(fetchList());
+    
+  }, [])
 
-  useEffect(() => {
-    getCard();
-     
-  }, []);
 
   return (
     <div className={styles.app}>
       <AppHeader />
-      <Main cards={cards} />
+      <Main/>
     </div>
   );
 }
