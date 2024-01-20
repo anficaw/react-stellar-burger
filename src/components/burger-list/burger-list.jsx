@@ -6,8 +6,8 @@ import {
 import { useDrag, useDrop } from "react-dnd";
 import styles from "./burger-list.module.css";
 import { useDispatch, useSelector } from "react-redux";
-import { getNewBurgerSelector } from "../store/action-selector";
-import { changeIngredient, delIngredient} from "../store/newburger-slice";
+import { getNewBurgerSelector } from "../../store/action-selector";
+import { changeIngredient, delIngredient} from "../../store/newburger-slice";
 
 const BurgerList = ({ card, index }) => {
   
@@ -43,12 +43,7 @@ const BurgerList = ({ card, index }) => {
   const onDel = () => {
     console.log("jhsjklfhlkjgslkgj")
     
-    dispatch({
-      type: delIngredient,
-      payload: {
-         index,
-      },
-    });     
+    dispatch( delIngredient(index));     
   }; 
 
   return (

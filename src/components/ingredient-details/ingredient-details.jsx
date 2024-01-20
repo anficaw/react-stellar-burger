@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./ingredient-details.module.css";
 import { useSelector } from "react-redux";
-import { getIngradientSelector } from "../store/action-selector";
+import { getIngradientSelector } from "../../store/action-selector";
 
 
 function IngredientDetails({ingradient}) {

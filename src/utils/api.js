@@ -9,16 +9,19 @@ const config = {
   },
 };
 
-export const getCard = () => {
-  return fetch(sait)
-    .then((res) => {
+function checkResponse(res) {
       if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`ошибка ${res.status}`);
-    })
+      return res.json();
+    }
+    return Promise.reject(`ошибка ${res.status}`);
 
-    .catch((err) => console.log(err));
+}
+
+
+export const getIngredients= () => {
+  return fetch(sait)
+    .then(checkResponse)
+    /*.catch((err) => console.log(err));*/
 };
 
 export const getOrder = (newBurgerID) => {
@@ -27,13 +30,6 @@ export const getOrder = (newBurgerID) => {
     method: "POST",
     body: JSON.stringify(newBurgerID),
   })
-    .then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      // если ошибка, отклоняем промис
-      return Promise.reject(`Ошибка: ${res.status}`);
-    })
-
-    .catch((err) => console.log(err));
+    .then(checkResponse)
+    /*.catch((err) => console.log(err));*/
 };

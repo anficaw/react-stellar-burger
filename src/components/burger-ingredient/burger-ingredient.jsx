@@ -3,7 +3,7 @@ import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components
 import { useDispatch } from "react-redux";
 
 import { useDrag } from "react-dnd";
-import { addIng } from "../store/ingradient-slice";
+import { addIng } from "../../store/ingradient-slice";
 
 function BurgerIngredient({ card, detalesingradient }) {
 

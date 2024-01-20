@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { getOrder } from "../../utils/api";
+import { getOrder } from "../utils/api";
 
 const initialState = {
   order: 0,

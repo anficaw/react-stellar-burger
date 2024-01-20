@@ -3,7 +3,7 @@ import styles from "./title-list.module.css";
 
 function TitleList(props) {
   return (
-    <a className={styles.titleList}>
+    <a className={styles.titleList} id={props.id}>
       <p className="text text_type_main-medium">{props.name}</p>
     </a>
   );

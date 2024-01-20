@@ -23,6 +23,7 @@ export const getIngradientsSelector = (store) => {
   const error = store.ingradients.errorIngr;
   const listload = store.ingradients.isLoad;
   const ingradientList = store.ingradients.ingradientList;
+  
   const ingradienstList = [];
   const newBurger = store.newBurger.newBurger;
 
@@ -37,13 +38,14 @@ export const getIngradientsSelector = (store) => {
         newBurger.ingradients.map((element) => {
          if (element.ingradient === item){
           number = number + 1;
-         }
-        
-      });
+         } });
+      if (newBurger.bun.ingradientbun === item){
+        number = number + 1;
+      }
 
        ingradienstList.push({        
         number: number,
-        id: uuid(),
+        id: 1,
         ingradient: item,
       });
     });
@@ -53,13 +55,12 @@ export const getIngradientsSelector = (store) => {
 };
 
 export const getNewBurgerSelector = (store) => {
-  
   const NewBurgerID = [];
   const NewBurger = store.newBurger.newBurger;
   
-  let summ = NewBurger.bun.price + NewBurger.bun.price;
+  let summ = NewBurger.bun.ingradientbun.price + NewBurger.bun.ingradientbun.price;
   
-  NewBurgerID.push(NewBurger.bun._id);
+  NewBurgerID.push(NewBurger.bun.ingradientbun._id);
   {
     NewBurger.ingradients.map((item) => {
       summ = summ + item.ingradient.price;

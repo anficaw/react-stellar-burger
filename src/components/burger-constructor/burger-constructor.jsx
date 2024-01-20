@@ -10,9 +10,14 @@ import OrderDetails from "../order-details/order-details";
 import BurgerList from "../burger-list/burger-list";
 
 import { useDispatch, useSelector } from "react-redux";
-import { getNewBurgerSelector } from "../store/action-selector";
+import { getNewBurgerSelector } from "../../store/action-selector";
 
-import { addBurger } from "../store/newburger-slice";
+import {
+  addBurger,
+  addIngredient,
+  addBun,
+  delIngredient,
+} from "../../store/newburger-slice";
 import { useDrop } from "react-dnd";
 
 import { newBurgerone } from "../../utils/data";
@@ -53,7 +58,7 @@ function BurgerConstructor() {
       okThree = "Не торопитесь, выбирайте с умом";
       setModalErrorOpen(true);
     } else {
-      if (newBurgerOrder.newBurger.bun.price === 0) {
+      if (newBurgerOrder.newBurger.bun.ingradientbun.price === 0) {
         okOne = "Пожалуйста, добавьте булочку к заказу";
         okTwo = "Мы начнем готовить, как только получим заказ";
         okThree = "Не торопитесь, выбирайте с умом";
@@ -66,27 +71,17 @@ function BurgerConstructor() {
     accept: "ing",
     drop(card) {
       const addIngradient = card;
-      const newBurg = {
-        bun: {},
-        ingradients: [],
-      };
-
-      newBurgerOrder.newBurger.ingradients.map((item) => {
-        if (item.ingradient.price != 0) {
-          newBurg.ingradients.push(item);
+      newBurgerOrder.newBurger.ingradients.map((item, index) => {
+        if (item.ingradient.price === 0) {
+          dispatch(delIngredient(index));
         }
       });
-
-      newBurg.bun = newBurgerOrder.newBurger.bun;
-
       if (addIngradient.ingradient.type === "bun") {
-        newBurg.bun = addIngradient.ingradient;
+        dispatch(addBun(addIngradient.ingradient));
       }
       if (addIngradient.ingradient.type != "bun") {
-        newBurg.ingradients.push(addIngradient);
+        dispatch(addIngredient(addIngradient));
       }
-
-      dispatch(addBurger(newBurg));
     },
   });
 
@@ -100,10 +95,10 @@ function BurgerConstructor() {
         <ConstructorElement
           type="top"
           isLocked={true}
-          text={newBurgerOrder.newBurger.bun.name + " (верх)"}
-          price={newBurgerOrder.newBurger.bun.price}
-          thumbnail={newBurgerOrder.newBurger.bun.image_mobile}
-          key={newBurgerOrder.newBurger.bun._id}
+          text={newBurgerOrder.newBurger.bun.ingradientbun.name + " (верх)"}
+          price={newBurgerOrder.newBurger.bun.ingradientbun.price}
+          thumbnail={newBurgerOrder.newBurger.bun.ingradientbun.image_mobile}
+          key={newBurgerOrder.newBurger.bun.ingradientbun._id}
         />
       </div>
       <div className={`custom-scroll ${styles.burgerConstructorList}`}>
@@ -118,10 +113,10 @@ function BurgerConstructor() {
         <ConstructorElement
           type="bottom"
           isLocked={true}
-          text={newBurgerOrder.newBurger.bun.name + " (низ)"}
-          price={newBurgerOrder.newBurger.bun.price}
-          thumbnail={newBurgerOrder.newBurger.bun.image_mobile}
-          key={newBurgerOrder.newBurger.bun._id}
+          text={newBurgerOrder.newBurger.bun.ingradientbun.name + " (низ)"}
+          price={newBurgerOrder.newBurger.bun.ingradientbun.price}
+          thumbnail={newBurgerOrder.newBurger.bun.ingradientbun.image_mobile}
+          key={newBurgerOrder.newBurger.bun.ingradientbun._id}
         />
       </div>
       <div className={`mt-10 text text_type_digits-medium ${styles.summa}`}>

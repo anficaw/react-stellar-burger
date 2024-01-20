@@ -191,6 +191,8 @@ export const saitOrder= "https://norma.nomoreparties.space/api/orders";
 
 export const newBurgerone = {
   bun: {
+  number:0,
+  ingradientbun:{  
  _id: "643d69a5c3f7b9001cfa093cn",
  name: "тут будет  ваша   булка       ",
  type: "bun",
@@ -203,7 +205,7 @@ export const newBurgerone = {
  image_mobile: "https://code.s3.yandex.net/react/code/bun-02-mobile.png",
  image_large: "https://code.s3.yandex.net/react/code/bun-02-large.png",
  __v: 0,
-},
+}},
 ingradients: [
  { 
    number: 0,

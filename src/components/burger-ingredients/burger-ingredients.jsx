@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import styles from "./burger-ingredients.module.css";
 import BurgerIngredient from "../burger-ingredient/burger-ingredient";
 import TitleList from "../title-list/title-list";
@@ -9,14 +9,12 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   getIngradientsSelector,
   getIngradientSelector,
-} from "../store/action-selector";
+} from "../../store/action-selector";
  
-import { addIng } from "../store/ingradient-slice";
+import { addIng } from "../../store/ingradient-slice";
 
 function BurgerIngredients() {
   const [isModalOpen, setModalOpen] = useState(false);
-
-  const [headersScroll, setHeadersScroll] = useState([0, 0, 0]);
 
   const [current, setCurrent] = useState("one");
 
@@ -35,11 +33,53 @@ function BurgerIngredients() {
 
   const onChoose = (one) => {
     onOpen();
-
     dispatch(addIng(one));
   };
 
-  
+/*--------------------------------------------------------------*/
+const onScrolling = () => {
+const links = document.querySelectorAll(".menu-item");
+const vsection = document.getElementById("ingredients_list");
+
+const vbun = document.getElementById("bun");
+const vsauce = document.getElementById("sauce");
+const vmain = document.getElementById("main");
+const sections = [vbun,vsauce,vmain];
+ 
+const cb = (entries) => {
+  entries.forEach((entry) => {
+
+    if (entry.isIntersecting && entry.intersectionRatio > 0.2) {
+           
+      const activeId = entry.target.id;
+    
+      if (activeId ==="bun"){
+        setCurrent("one");
+      }
+      if (activeId ==="sauce"){
+        setCurrent("two");
+      }
+      if (activeId ==="main"){
+        setCurrent("three");
+      }
+      
+    }
+  });
+};
+
+const sectionObserver = new IntersectionObserver(cb, {
+  root: vsection,
+  rootMargin: '500px 0px -500px 0px',
+  threshold: [0,0,1]
+});
+
+sections.forEach((sec) => {
+  sectionObserver.observe(sec);
+});
+
+}
+/*--------------------------------------------------------------*/
+
 
   return (
     <section className={styles.burgerIngredients}>
@@ -59,9 +99,9 @@ function BurgerIngredients() {
         </Tab>
 
       </div>
-      <div className={`custom-scroll ${styles.list}`} >
-        <TitleList name="Булки" />
-        <ul className={styles.components}>
+      <div className={`custom-scroll ${styles.list}`}  onScroll={onScrolling} id='ingredients_list'>
+        <TitleList name="Булки" type='bun' id="bun"/>
+        <ul className={`section ${styles.components}`} >
           {cards.map((item) => {
             if (item.ingradient.type === "bun") {
               return (
@@ -76,8 +116,8 @@ function BurgerIngredients() {
             }
           })}
         </ul>
-        <TitleList name="Соусы" />
-        <ul className={styles.components}>
+        <TitleList name="Соусы" type='sauce' id="sauce"/>
+        <ul className={`section ${styles.components}`} >
           {cards.map((item) => {
             if (item.ingradient.type === "sauce") {
               return (
@@ -92,8 +132,8 @@ function BurgerIngredients() {
             }
           })}
         </ul>
-        <TitleList name="Начинки" />
-        <ul className={styles.components}>
+        <TitleList name="Начинки" type='main' id="main"/>
+        <ul className={`section ${styles.components}`} >
           {cards.map((item) => {
             if (item.ingradient.type === "main") {
               return (

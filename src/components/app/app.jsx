@@ -7,7 +7,7 @@ import { useEffect } from "react";
 
 import { useDispatch } from "react-redux";
 
-import {fetchList} from "../store/ingradients-slice";
+import {fetchList} from "../../store/ingradients-slice";
 
  
 function App() {

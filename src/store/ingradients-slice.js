@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { getCard } from "../../utils/api";
+import { getIngredients } from "../utils/api";
 
 const initialState = {
     ingradientList: [],
@@ -11,9 +11,8 @@ const initialState = {
 export const fetchList = createAsyncThunk(
     'ingradients/get',
     async () => {
-      const res = await getCard();
+      const res = await getIngredients();
       const data = res.data;
-     
       return data;
       
     }

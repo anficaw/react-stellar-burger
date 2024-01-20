@@ -2,8 +2,8 @@ import React, { useEffect } from "react";
 import styles from "./order-details.module.css";
 import icon from "../../images/successIcon.svg";
 import { useDispatch, useSelector } from "react-redux";
-import { getNewBurgerSelector, getOrderSelector} from "../store/action-selector";
-import { fetchOrder } from "../store/order-slice";
+import { getNewBurgerSelector, getOrderSelector} from "../../store/action-selector";
+import { fetchOrder } from "../../store/order-slice";
 
 function OrderDetails({one, two, three}) {
   const dispatch = useDispatch();

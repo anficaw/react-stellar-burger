@@ -5,7 +5,7 @@ function ModalOverlay({ onClose }) {
   return (
     <section
       className={`  ${styles.modaloverlay}`}
-      onClick={() => onClose()}
+      onClick={onClose}
     ></section>
   );
 }
