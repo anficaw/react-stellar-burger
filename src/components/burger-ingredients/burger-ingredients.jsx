@@ -39,16 +39,7 @@ function BurgerIngredients() {
     dispatch(addIng(one));
   };
 
-  const onScrollDetal = () =>{
-    const ttt = document.getElementsByName("Булки");
-    var rect = ttt.getBoundingClientRect();
-    console.log ('111111');
-    console.log (ttt);
-    console.log (rect);
-    
-
-
-  }
+  
 
   return (
     <section className={styles.burgerIngredients}>
@@ -68,7 +59,7 @@ function BurgerIngredients() {
         </Tab>
 
       </div>
-      <div className={`custom-scroll ${styles.list}`} onScroll={onScrollDetal()}>
+      <div className={`custom-scroll ${styles.list}`} >
         <TitleList name="Булки" />
         <ul className={styles.components}>
           {cards.map((item) => {
