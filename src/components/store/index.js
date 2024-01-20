@@ -6,6 +6,8 @@ import { orderSlice } from "./order-slice";
 import ingradientReducer from "./ingradient-slice";
 import ingradientsReducer from "./ingradients-slice";
 import newburgerReducer from "./newburger-slice";
+import orderReducer from "./order-slice";
+
 
 export const initialState = {
     ingradientList: [],
@@ -22,6 +24,7 @@ export const store = configureStore({
     ingradient: ingradientReducer,
     ingradients: ingradientsReducer,
     newBurger: newburgerReducer,
+    order: orderReducer,
 
   },
 

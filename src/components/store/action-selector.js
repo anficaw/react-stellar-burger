@@ -2,23 +2,22 @@ import { v4 as uuid } from 'uuid';
 
 export const getIngradientSelector = (store) => store.ingradient.ingradient;
 
-/*export const getOrderSelector = (store) =>  {
-  console.log(store.order.errorOrder);
-
+export const getOrderSelector = (store) =>{
   const error = store.order.errorOrder;
   const listload = store.order.orderisLoad;
   const order = store.order.order;
    
-
   if (listload === false) {
     console.log("Идет загрузка заказа и получение номера");
     if (error === true) {
       console.log(error);
-    }
-  } else {
-     return order;
+      console.log("какая то ошибка");
+    }}
+   else {
+    console.log("получили");  
   }
-};*/
+  return order;
+};
 
 export const getIngradientsSelector = (store) => {
   const error = store.ingradients.errorIngr;

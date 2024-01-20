@@ -6,23 +6,25 @@ import Modal from "../modal/modal";
 import IngredientDetails from "../ingredient-details/ingredient-details";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useDispatch, useSelector } from "react-redux";
-import { getIngradientsSelector, getNewBurgerSelector} from "../store/action-selector";
-import { useDrop } from "react-dnd";
-
+import {
+  getIngradientsSelector,
+  getIngradientSelector,
+} from "../store/action-selector";
+ 
+import { addIng } from "../store/ingradient-slice";
 
 function BurgerIngredients() {
-
-
   const [isModalOpen, setModalOpen] = useState(false);
-  const [ingredientopen, setIngredientopen] = useState();
+
+  const [headersScroll, setHeadersScroll] = useState([0, 0, 0]);
 
   const [current, setCurrent] = useState("one");
 
   const cards = useSelector(getIngradientsSelector);
+  const ingradient = useSelector(getIngradientSelector);
 
   const dispatch = useDispatch();
 
-    
   const onClose = () => {
     setModalOpen(false);
   };
@@ -33,12 +35,20 @@ function BurgerIngredients() {
 
   const onChoose = (one) => {
     onOpen();
-    setIngredientopen(one);
-    /*dispatch({
-      type: addIng,
-      payload: one,
-    });*/
+
+    dispatch(addIng(one));
   };
+
+  const onScrollDetal = () =>{
+    const ttt = document.getElementsByName("Булки");
+    var rect = ttt.getBoundingClientRect();
+    console.log ('111111');
+    console.log (ttt);
+    console.log (rect);
+    
+
+
+  }
 
   return (
     <section className={styles.burgerIngredients}>
@@ -56,23 +66,19 @@ function BurgerIngredients() {
           {" "}
           Начинки{" "}
         </Tab>
+
       </div>
-      <div className={`custom-scroll ${styles.list}`}>
+      <div className={`custom-scroll ${styles.list}`} onScroll={onScrollDetal()}>
         <TitleList name="Булки" />
         <ul className={styles.components}>
           {cards.map((item) => {
             if (item.ingradient.type === "bun") {
               return (
-                <li
-                  className={styles.component}
-                  key={item.ingradient._id}
-                   
-                >
+                <li className={styles.component} key={item.ingradient._id}>
                   <BurgerIngredient
                     card={item}
                     key={item.ingradient._id}
                     detalesingradient={onChoose}
-                    
                   />
                 </li>
               );
@@ -84,11 +90,7 @@ function BurgerIngredients() {
           {cards.map((item) => {
             if (item.ingradient.type === "sauce") {
               return (
-                <li
-                  className={styles.component}
-                  key={item.ingradient._id}
-                   
-                >
+                <li className={styles.component} key={item.ingradient._id}>
                   <BurgerIngredient
                     card={item}
                     key={item.ingradient._id}
@@ -104,11 +106,7 @@ function BurgerIngredients() {
           {cards.map((item) => {
             if (item.ingradient.type === "main") {
               return (
-                <li
-                  className={styles.component}
-                  key={item.ingradient._id}
-                   
-                >
+                <li className={styles.component} key={item.ingradient._id}>
                   <BurgerIngredient
                     card={item}
                     key={item.ingradient._id}
@@ -122,7 +120,7 @@ function BurgerIngredients() {
       </div>
       {isModalOpen && (
         <Modal onClose={onClose}>
-          <IngredientDetails ingradient={ingredientopen}/>
+          <IngredientDetails ingradient={ingradient} />
         </Modal>
       )}
     </section>

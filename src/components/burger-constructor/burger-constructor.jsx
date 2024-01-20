@@ -2,9 +2,7 @@ import React, { useState } from "react";
 import styles from "./burger-constructor.module.css";
 import {
   ConstructorElement,
-  DragIcon,
   Button,
-  CurrencyIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import Icon from "../../images/icon 36x36.svg";
 import Modal from "../modal/modal";
@@ -12,49 +10,56 @@ import OrderDetails from "../order-details/order-details";
 import BurgerList from "../burger-list/burger-list";
 
 import { useDispatch, useSelector } from "react-redux";
-import {
-  getNewBurgerSelector,
-  getIngradientSelector,
-  getOrderSelector,
-} from "../store/action-selector";
-import { getOrder } from "../../utils/api";
-import { addBurger } from "../store/newburger-slice";
-import { useDrag, useDrop } from "react-dnd";
-import { addIng } from "../store/ingradient-slice";
-import { v4 as uuid } from "uuid";
-import { useEffect } from "react";
-import {fetchList} from "../store/order-slice";
+import { getNewBurgerSelector } from "../store/action-selector";
 
+import { addBurger } from "../store/newburger-slice";
+import { useDrop } from "react-dnd";
+
+import { newBurgerone } from "../../utils/data";
+import OrderError from "../order-error/order-error";
+
+let ok = "true";
+let okOne = "Идентификатор заказа";
+let okTwo = "Ваш заказ начали готовить";
+let okThree = "Дождитесь готовности на орбитальной странции";
 
 function BurgerConstructor() {
   const dispatch = useDispatch();
 
-  const addIngradient = useSelector(getIngradientSelector);
-
   const newBurgerOrder = useSelector(getNewBurgerSelector);
-  /*const numberOrder = useSelector(getOrderSelector);*/
+
   const NewBurgerCost = newBurgerOrder.newBurgerCost;
 
-  const newBurgerID = {
-    ingredients: newBurgerOrder.newBurgerID,
-  };
-
   const [isModalOpen, setModalOpen] = useState(false);
-   
+  const [isModalErrorOpen, setModalErrorOpen] = useState(false);
 
   const onClose = () => {
+    dispatch(addBurger(newBurgerone));
     setModalOpen(false);
   };
 
-    
+  const onCloseError = () => {
+    setModalErrorOpen(false);
+  };
+
   const onOpen = () => {
-    setModalOpen(true);
-    /*  getOrder(newBurgerOrder.newBurgerID)
-      .then((data) => {
-        setnumberOrder(data.order.number);
-        setModalOpen(true);
-      })
-      .catch((err) => console.log(err));*/
+    okOne = "Идентификатор заказа";
+    okTwo = "Ваш заказ начали готовить";
+    okThree = "Дождитесь готовности на орбитальной странции";
+
+    if (NewBurgerCost === 0) {
+      okOne = "Пожалуйста, соберите свой бургер ";
+      okTwo = "Мы начнем готовить, как только получим заказ";
+      okThree = "Не торопитесь, выбирайте с умом";
+      setModalErrorOpen(true);
+    } else {
+      if (newBurgerOrder.newBurger.bun.price === 0) {
+        okOne = "Пожалуйста, добавьте булочку к заказу";
+        okTwo = "Мы начнем готовить, как только получим заказ";
+        okThree = "Не торопитесь, выбирайте с умом";
+        setModalErrorOpen(true);
+      } else setModalOpen(true);
+    }
   };
 
   const [, dropRef] = useDrop({
@@ -80,14 +85,12 @@ function BurgerConstructor() {
       if (addIngradient.ingradient.type != "bun") {
         newBurg.ingradients.push(addIngradient);
       }
-      dispatch({
-        type: addBurger,
-        payload: newBurg,
-      });
+
+      dispatch(addBurger(newBurg));
     },
   });
 
-   return (
+  return (
     <section
       className={styles.burgerconstructor}
       onDragOver={(evt) => evt.preventDefault()}
@@ -103,7 +106,7 @@ function BurgerConstructor() {
           key={newBurgerOrder.newBurger.bun._id}
         />
       </div>
-      <div className={`custom-scroll ${styles.burgerConstructorList}`} >
+      <div className={`custom-scroll ${styles.burgerConstructorList}`}>
         {newBurgerOrder.newBurger.ingradients.map((item, index) => {
           return (
             <BurgerList card={item} index={index} key={item.id}></BurgerList>
@@ -130,7 +133,13 @@ function BurgerConstructor() {
       </div>
       {isModalOpen && (
         <Modal onClose={onClose}>
-          <OrderDetails number={0} />
+          <OrderDetails number={0} one={okOne} two={okTwo} three={okThree} />
+        </Modal>
+      )}
+
+      {isModalErrorOpen && (
+        <Modal onClose={onCloseError}>
+          <OrderError number={0} one={okOne} two={okTwo} three={okThree} />
         </Modal>
       )}
     </section>

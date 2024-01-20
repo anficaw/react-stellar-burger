@@ -49,7 +49,8 @@ const newBurgerSlice = createSlice({
     reducers: {
         addBurger: (state, action) => {           
             state.newBurger = action.payload;},
-        delIngredient: (state, action) => {           
+        delIngredient: (state, action) => {     
+              console.log(action.payload);  
               state.newBurger.ingradients.splice(action.payload,1)},  
         changeIngredient: (state, action) => {   
           const {indexFrom, indexTo, ingredient} = action.payload;       

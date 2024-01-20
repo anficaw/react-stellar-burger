@@ -13,6 +13,7 @@ export const fetchList = createAsyncThunk(
     async () => {
       const res = await getCard();
       const data = res.data;
+     
       return data;
       
     }

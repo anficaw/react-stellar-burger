@@ -11,7 +11,7 @@ import { changeIngredient, delIngredient} from "../store/newburger-slice";
 
 const BurgerList = ({ card, index }) => {
   
-  const dispatch = useDispatch;
+  const dispatch = useDispatch();
 
   const [{ isDragStart }, dragRef] = useDrag({
     type: "sort",
@@ -28,24 +28,25 @@ const BurgerList = ({ card, index }) => {
     hover({ ingredient }) {
     
       if (card.id === ingredient.id) return;
-
-      dispatch({
-        type: changeIngredient,
-        payload: {
+       
+      dispatch(changeIngredient({
+         
           indexFrom: findIndex(ingredient),
           indexTo: index,
           ingredient: ingredient,
-        },
-      });
+        }),
+      );
+
     },
   });
    
   const onDel = () => {
     console.log("jhsjklfhlkjgslkgj")
+    
     dispatch({
       type: delIngredient,
       payload: {
-         ingredient: index,
+         index,
       },
     });     
   }; 
@@ -61,7 +62,8 @@ const BurgerList = ({ card, index }) => {
         text={card.ingradient.name}
         price={card.ingradient.price}
         thumbnail={card.ingradient.image_mobile}
-        onclick={onDel}
+         
+        handleClose={onDel}
       />
     </div>
   );

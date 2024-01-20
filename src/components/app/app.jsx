@@ -13,6 +13,7 @@ import {fetchList} from "../store/ingradients-slice";
 function App() {
   
   const dispatch = useDispatch()
+  
     useEffect (() => {
     dispatch(fetchList());
     
