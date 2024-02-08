@@ -1,6 +1,7 @@
 import styles from "./burger-ingredient.module.css";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useDispatch } from "react-redux";
+import { Link, NavLink } from "react-router-dom";
 
 import { useDrag } from "react-dnd";
 import { addIng } from "../../store/ingradient-slice";
@@ -16,7 +17,9 @@ function BurgerIngredient({ card, detalesingradient }) {
   });
 
   return (
-    <div
+    <Link
+      to={`/ingredients/${card.ingradient._id}`}
+      key={card.ingradient._id}
       className={styles.burgerIngredient}
       onClick={() => detalesingradient(card.ingradient)}
       ref={dragRef}
@@ -43,7 +46,7 @@ function BurgerIngredient({ card, detalesingradient }) {
           {card.number}
         </div>
       )}
-    </div>
+    </Link>
   );
 }
 export default BurgerIngredient;

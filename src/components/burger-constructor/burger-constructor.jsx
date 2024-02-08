@@ -5,13 +5,14 @@ import {
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import Icon from "../../images/icon 36x36.svg";
+ 
 import Modal from "../modal/modal";
 import OrderDetails from "../order-details/order-details";
 import BurgerList from "../burger-list/burger-list";
 
 import { useDispatch, useSelector } from "react-redux";
 import { getNewBurgerSelector } from "../../store/action-selector";
-
+ 
 import {
   addBurger,
   addIngredient,
@@ -22,6 +23,7 @@ import { useDrop } from "react-dnd";
 
 import { newBurgerone } from "../../utils/data";
 import OrderError from "../order-error/order-error";
+
 
 let ok = "true";
 let okOne = "Идентификатор заказа";

@@ -1,0 +1,23 @@
+.linkProfile {
+  width: 320px;
+  height: 64px;
+  display: flex;
+  flex-direction: row;
+
+  align-items: center;
+
+  color: #8585ad;
+
+  text-decoration: none;
+   
+}
+
+.active {
+  width: 320px;
+  height: 64px;
+  display: flex;
+  flex-direction: row;
+  color: rgba(242, 242, 243, 1);
+  align-items: center;
+  text-decoration: none;
+}
