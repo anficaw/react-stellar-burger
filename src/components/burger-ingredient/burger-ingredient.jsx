@@ -1,14 +1,14 @@
 import styles from "./burger-ingredient.module.css";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useDispatch } from "react-redux";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink,useSearchParams, useLocation } from "react-router-dom";
 
 import { useDrag } from "react-dnd";
 import { addIng } from "../../store/ingradient-slice";
 
-function BurgerIngredient({ card, detalesingradient }) {
-
-  const dispatch = useDispatch();
+function BurgerIngredient({ card }) {
+   
+  const location = useLocation();
 
   const [{ isDragStart }, dragRef] = useDrag({
     type: "ing",
@@ -16,13 +16,16 @@ function BurgerIngredient({ card, detalesingradient }) {
     
   });
 
+  
   return (
     <Link
+      /*state={{ background: true }}*/
       to={`/ingredients/${card.ingradient._id}`}
       key={card.ingradient._id}
       className={styles.burgerIngredient}
-      onClick={() => detalesingradient(card.ingradient)}
+      state={{ background: location }}
       ref={dragRef}
+
     >
       <img
         className={styles.image}

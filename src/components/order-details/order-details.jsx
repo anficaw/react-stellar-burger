@@ -4,21 +4,23 @@ import icon from "../../images/successIcon.svg";
 import { useDispatch, useSelector } from "react-redux";
 import { getNewBurgerSelector, getOrderSelector} from "../../store/action-selector";
 import { fetchOrder } from "../../store/order-slice";
+import { useNavigate } from "react-router-dom";
 
 function OrderDetails({one, two, three}) {
   const dispatch = useDispatch();
+
   
   const newBurgerOrder = useSelector(getNewBurgerSelector);
   const newBurgerID = {
     ingredients: newBurgerOrder.newBurgerID,
   };
-    
+  
+  
   useEffect (() => {
     dispatch(fetchOrder(newBurgerID));  
   }, [])
     
   const newOrder = useSelector(getOrderSelector);
-
 
   return (
     <section className={styles.orderDetails}>

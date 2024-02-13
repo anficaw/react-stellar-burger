@@ -1,6 +1,6 @@
-import { useDispatch, useSelector } from "react-redux";
+
 import { sait } from "./data";
-import { saitOrder } from "./data";
+import { saitOrder} from "./data";
 
 const config = {
   headers: {
@@ -9,7 +9,7 @@ const config = {
   },
 };
 
-function checkResponse(res) {
+export function checkResponse(res) {
       if (res.ok) {
       return res.json();
     }
@@ -33,3 +33,4 @@ export const getOrder = (newBurgerID) => {
     .then(checkResponse)
     /*.catch((err) => console.log(err));*/
 };
+

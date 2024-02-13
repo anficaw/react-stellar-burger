@@ -10,31 +10,46 @@ import {
   getIngradientsSelector,
   getIngradientSelector,
 } from "../../store/action-selector";
- 
+import { useParams, useNavigate } from "react-router-dom";
 import { addIng } from "../../store/ingradient-slice";
 
 function BurgerIngredients() {
-  const [isModalOpen, setModalOpen] = useState(false);
 
+  /*const [isModalOpen, setModalOpen] = useState(false);*/
+ 
   const [current, setCurrent] = useState("one");
 
   const cards = useSelector(getIngradientsSelector);
   const ingradient = useSelector(getIngradientSelector);
 
+  const navigate = useNavigate(); 
+  
   const dispatch = useDispatch();
 
-  const onClose = () => {
+  /*const onClose = () => {
+
     setModalOpen(false);
+    navigate('/'); 
+   
   };
 
   const onOpen = () => {
     setModalOpen(true);
-  };
+  };*/
 
   const onChoose = (one) => {
-    onOpen();
-    dispatch(addIng(one));
+    /*onOpen();*/
+    /*dispatch(addIng(one));*/
   };
+
+  /*if (ingId) {
+    const singl = cards.filter((item) => item.ingradient._id === ingId);
+    const ingradient= singl[0].ingradient;
+    onChoose(ingradient)
+    /*onOpen();
+    console.log('555555');
+    console.log(ingradient)};*/
+
 
 /*--------------------------------------------------------------*/
 const onScrolling = () => {
@@ -109,7 +124,7 @@ sections.forEach((sec) => {
                   <BurgerIngredient
                     card={item}
                     key={item.ingradient._id}
-                    detalesingradient={onChoose}
+                    
                   />
                 </li>
               );
@@ -125,7 +140,7 @@ sections.forEach((sec) => {
                   <BurgerIngredient
                     card={item}
                     key={item.ingradient._id}
-                    detalesingradient={onChoose}
+                    
                   />
                 </li>
               );
@@ -141,7 +156,7 @@ sections.forEach((sec) => {
                   <BurgerIngredient
                     card={item}
                     key={item.ingradient._id}
-                    detalesingradient={onChoose}
+                    
                   />
                 </li>
               );
@@ -149,11 +164,7 @@ sections.forEach((sec) => {
           })}
         </ul>
       </div>
-      {isModalOpen && (
-        <Modal onClose={onClose}>
-          <IngredientDetails ingradient={ingradient} />
-        </Modal>
-      )}
+            
     </section>
   );
 }

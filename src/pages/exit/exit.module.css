@@ -1,4 +1,4 @@
-.login {
+.exit{
     margin: 0;
     margin-top: 100px;
     width: 480px;
@@ -9,18 +9,4 @@
     align-items: center; 
 
 
-}
-
-.newUser{
-
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    margin-top: 16px;
-    
-}
-
-.linkLogin{
-    text-decoration: none;
-    color: blue;
 }

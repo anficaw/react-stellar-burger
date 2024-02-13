@@ -1,6 +1,12 @@
 import { v4 as uuid } from 'uuid';
+import { setAuthChecked, setUser } from "./user-slice";
+import { getuplogin } from '../utils/api';
 
 export const getIngradientSelector = (store) => store.ingradient.ingradient;
+
+export const getUserActive = (store) => store.user.user;
+
+/*export const getUserMessage = (store) => store.user.isSentMessage;*/
 
 export const getOrderSelector = (store) =>{
   const error = store.order.errorOrder;
@@ -76,3 +82,29 @@ export const getNewBurgerSelector = (store) => {
   
   return NewBurgerConstructor;
 };
+
+
+export const getIngradientsSelectornew = (store) => {
+  const error = store.ingradientsnew.errorIngr;
+  const listload = store.ingradientsnew.isLoad;
+  const ingradientList= store.ingradientsnew.ingradientList;
+  
+  const ingradienstList = [];
+   
+  if (listload === false) {
+    console.log("Идет загрузка ингредиентов в другое хранилище");
+    if (error === true) {
+      console.log(error);
+    }
+  } else {
+    ingradientList.forEach((item) => {
+        ingradienstList.push({        
+        number: 0,
+        id: 1,
+        ingradient: item,
+      });
+    });
+  }
+   return ingradienstList;
+};
+

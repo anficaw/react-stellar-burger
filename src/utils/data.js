@@ -1,4 +1,19 @@
 import { v4 as uuid } from 'uuid';
+
+export const sait= "https://norma.nomoreparties.space/api/ingredients";
+export const saitOrder= "https://norma.nomoreparties.space/api/orders";
+export const saitfogot= "https://norma.nomoreparties.space/api/password-reset";
+export const saitreset= "https://norma.nomoreparties.space/api/password-reset/reset";
+export const saitregister= "https://norma.nomoreparties.space/api/auth/register";
+export const saitlogin= "https://norma.nomoreparties.space/api/auth/login";
+export const saitlogout= "https://norma.nomoreparties.space/api/auth/logout";
+export const saittoken= "https://norma.nomoreparties.space/api/auth/token";
+export const saituser= "https://norma.nomoreparties.space/api/auth/user";
+
+
+
+
+
 export const data = [
   {
      "_id":"60666c42cc7b410027a1a9b1",
@@ -186,9 +201,6 @@ export const data = [
   }
 ]
 
-export const sait= "https://norma.nomoreparties.space/api/ingredients";
-export const saitOrder= "https://norma.nomoreparties.space/api/orders";
-
 export const newBurgerone = {
   bun: {
   number:0,
@@ -229,9 +241,6 @@ ingradients: [
               
 ],
 }
-
-
-
 
 
 export const NewBurgerone = {
