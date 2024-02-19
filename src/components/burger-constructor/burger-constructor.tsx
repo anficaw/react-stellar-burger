@@ -99,8 +99,7 @@ function BurgerConstructor() {
     accept: "ing",
     drop(card) {
       const addIngredientt = card;
-       {console.log("333333")}
-       {console.log(card)}
+       
       newBurgerOrder.newBurger.ingredients.map((item, index) => {
         if (item.ingredient.price === 0) {
           dispatch(delIngredient(index));
@@ -109,12 +108,9 @@ function BurgerConstructor() {
       if (addIngredientt.ingredient.ingredient.type === "bun") {
         dispatch(addBun(addIngredientt.ingredient.ingredient));
       }
-      {console.log("проверяем что")}
-       {console.log(addIngredientt.ingredient.ingredient.type)}
-
+       
       if (addIngredientt.ingredient.ingredient.type !== "bun") {
-        {console.log("начинка")}
-        {console.log(card)}
+         
         dispatch(addIngredient(addIngredientt.ingredient));
       }
 
@@ -127,9 +123,7 @@ function BurgerConstructor() {
       onDragOver={(evt) => evt.preventDefault()}
       ref={dropRef}
     >
-       {console.log("bun")}
-       {console.log(newBurgerOrder)}
-      <div className={`mt-25 pt-4 pl-8 mr-7 ${styles.bun}`}>
+        <div className={`mt-25 pt-4 pl-8 mr-7 ${styles.bun}`}>
            
         <ConstructorElement
           type="top"
@@ -142,11 +136,9 @@ function BurgerConstructor() {
       </div>
       <div className={`custom-scroll ${styles.burgerConstructorList}`}>
         {newBurgerOrder.newBurger.ingredients.map((item, index) => {
-           {console.log("6666666666")
-           console.log(item)}
-          return (
-              <div></div>      
-            /*<BurgerList card={item} index={index} key={item.id}></BurgerList>9*/
+           
+             return (
+            <BurgerList card={item} index={index} key={item.id}></BurgerList>
           )
         })}
       </div>

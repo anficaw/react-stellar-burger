@@ -51,7 +51,6 @@ const newBurgerSlice = createSlice({
         addBurger: (state, action) => {           
             state.newBurger = action.payload;},
         addIngredient: (state, action) => {     
-          console.log(action.payload);  
           const ingred = action.payload;
           ingred.id = uuid();
           state.newBurger.ingredients.push(ingred);
@@ -59,7 +58,7 @@ const newBurgerSlice = createSlice({
         addBun: (state, action) => {         
           state.newBurger.bun.ingredientbun = action.payload},   
         delIngredient: (state, action) => {     
-          console.log(action.payload); 
+           
           state.newBurger.ingredients.splice(action.payload,1)},  
         changeIngredient: (state, action) => {   
           const {indexFrom, indexTo, ingredient} = action.payload;       

@@ -24,16 +24,21 @@ type ТCollectedprops = {
   isDragStart:boolean;
 }
 
-const BurgerList = (card: TIngredients, index:number, key:string) => {
+type ТBurgerListprops = {
+  card:TIngredients,
+  index:number
+}
+
+const BurgerList = (props:ТBurgerListprops) => {
   
   const dispatch = useDispatch();
 
   const [{ isDragStart }, dragRef] = useDrag<ТDragprops,unknown,ТCollectedprops>({
     type: "sort",
-    item: { ingredient: card },
+    item: { ingredient: props.card },
   });
   
-  const newBurgerOrder = useSelector(getNewBurgerSelector);
+  const newBurgerOrder:TNewBurgerConstructor = useSelector(getNewBurgerSelector);
 
   const findIndex = (item:TIngredients) => {
      return newBurgerOrder.newBurger.ingredients.indexOf(item);
@@ -43,11 +48,11 @@ const BurgerList = (card: TIngredients, index:number, key:string) => {
     accept: "sort",
     hover({ ingredient }) {
   
-      if (card.id === ingredient.id) return;
+      if (props.card.id === ingredient.id) return;
        
       dispatch(changeIngredient({
           indexFrom: findIndex(ingredient),
-          indexTo: index,
+          indexTo: props.index,
           ingredient: ingredient,
         }),
       );
@@ -56,24 +61,24 @@ const BurgerList = (card: TIngredients, index:number, key:string) => {
   });
    
   const onDel = () => {
-      dispatch( delIngredient(index));     
+      dispatch( delIngredient(props.index));     
   }; 
 
- if (!card.ingredient ) {
+ if (!props.card.ingredient ) {
   return null
  }
 
   return (
     <div
       className={`mr-2 ${styles.ingredientslist}`}
-      key={card.id}
+      key={props.card.id}
       ref={(node) => dropRef(dragRef(node))}
     >
       <DragIcon type="primary"/>
       <ConstructorElement
-        text={card.ingredient.name}
-        price={card.ingredient.price}
-        thumbnail={card.ingredient.image_mobile}
+        text={props.card.ingredient.name}
+        price={props.card.ingredient.price}
+        thumbnail={props.card.ingredient.image_mobile}
         handleClose={onDel}
       />
     </div>

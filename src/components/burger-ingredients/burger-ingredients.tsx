@@ -16,7 +16,7 @@ function BurgerIngredients() {
  
   const [current, setCurrent] = useState("one");
 
-  const cards= useSelector(getIngredientsSelector) ;
+  const cards:TIngredients[] = useSelector(getIngredientsSelector);
 
   const onScrolling = () => {
     const vsection = document.getElementById("ingredients_list");
@@ -27,7 +27,7 @@ function BurgerIngredients() {
     const cb = (entries:any) => {
       entries.forEach((entry:any) => {
         if (entry.isIntersecting && entry.intersectionRatio > 0.2) {
-           const activeId = entry.target.id;
+          const activeId: string = entry.target.id;
            if (activeId ==="bun"){
             setCurrent("one");}
             if (activeId ==="sauce"){

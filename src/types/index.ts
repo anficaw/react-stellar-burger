@@ -43,3 +43,8 @@ export type TIngredient = {
       isAuthChecked: boolean,
       isSentMessage: boolean }
        
+      export type TUserT = {
+          name:string,
+          email:string
+         }      
+          

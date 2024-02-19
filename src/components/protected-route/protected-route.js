@@ -1,8 +1,9 @@
 import { Navigate, useLocation } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch,  } from "react-redux";
 import React, { useEffect } from "react";
 import { setAuthChecked } from "../../store/user-slice";
 import { checkUserAuth } from "../../store/action";
+import {  useSelector } from "react-redux";
 
 const Protected = ({ onlyUnAuth = false, component }) => {
     

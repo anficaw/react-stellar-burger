@@ -13,6 +13,12 @@ export const fetchOrder = createAsyncThunk("order/get", async (newBurgerID) => {
   return data;
 });
 
+/*export const fetchOrder = createAsyncThunk("order/get", async (newBurgerID) => {
+  const res = await getOrder(newBurgerID);
+  const data = res.order.number;
+  return data;
+});*/
+
 const orderSlice = createSlice({
   name: "order",
   initialState: initialState,

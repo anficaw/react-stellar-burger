@@ -28,8 +28,6 @@ function App() {
     dispatch(checkUserAuth())
   }, []);
 
-  const location = useLocation();
-  const background = location.state && location.state.background;
   
     return (
     <div className={styles.app}>
@@ -56,4 +54,3 @@ function App() {
 }
 
 export default App;
-/*<Route path="/login" element={<OnlyUnAuth component={<Login />} />} />*/

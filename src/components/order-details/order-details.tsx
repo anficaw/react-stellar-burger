@@ -1,11 +1,13 @@
 import React, { useEffect } from "react";
 import styles from "./order-details.module.css";
 import icon from "../../images/successIcon.svg";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch,  } from "react-redux";
 import { getNewBurgerSelector, getOrderSelector} from "../../store/action-selector";
 import { fetchOrder } from "../../store/order-slice";
 import { TNewBurgerConstructor } from "../../types";
-
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { getOrder } from "../../utils/api";
+import {  useSelector } from "react-redux";
 
 type TOrderDetailstypeprops = {
   one: string,
@@ -19,21 +21,23 @@ type ТnewBurgerID = {
 
 
 function OrderDetails(props:TOrderDetailstypeprops) {
-/*function OrderDetails(props) {*/
+
+
   
   const dispatch = useDispatch();
  
   const newBurgerOrder: TNewBurgerConstructor = useSelector(getNewBurgerSelector);
-  const newBurgerID: ТnewBurgerID | null= {
+  const newBurgerID: ТnewBurgerID= {
     ingredients: newBurgerOrder.newBurgerID,
   };
   
+  
   useEffect (() => {
-    dispatch(fetchOrder()); 
-    /*dispatch(fetchOrder(newBurgerID)); */
+    /*dispatch(fetchOrder());*/
+    dispatch(fetchOrder(newBurgerID));
   }, [])
     
-  const newOrder = useSelector(getOrderSelector);
+  const newOrder: string = useSelector(getOrderSelector); 
 
   return (
     <section className={styles.orderDetails}>

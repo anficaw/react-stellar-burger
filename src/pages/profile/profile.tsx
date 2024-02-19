@@ -5,9 +5,10 @@ import { Input,
 import { getUserActive } from "../../store/action-selector";
 import { redact } from "../../store/action";
 import { useDispatch, useSelector } from "react-redux";
+import { TUserT } from "../../types";
  
 function Profile() {
-  const user = useSelector(getUserActive);
+  const user: TUserT = useSelector(getUserActive);
   const [email, setEmail] = useState(user.email);
   const [password, setPassword] = useState('');
   const [name, setName] = useState(user.name);
