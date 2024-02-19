@@ -6,7 +6,6 @@ import styles from "./layout.module.css";
 function LayOut() {
   return (
     <div className={styles.layout}>
-    
       <AppHeader />
 
       <Outlet />

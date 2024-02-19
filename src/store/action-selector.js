@@ -2,7 +2,7 @@ import { v4 as uuid } from 'uuid';
 import { setAuthChecked, setUser } from "./user-slice";
 import { getuplogin } from '../utils/api';
 
-export const getIngradientSelector = (store) => store.ingradient.ingradient;
+export const getIngredientSelector = (store) => store.ingredient.ingredient;
 
 export const getUserActive = (store) => store.user.user;
 
@@ -25,10 +25,10 @@ export const getOrderSelector = (store) =>{
   return order;
 };
 
-export const getIngradientsSelector = (store) => {
-  const error = store.ingradients.errorIngr;
-  const listload = store.ingradients.isLoad;
-  const ingradientList = store.ingradients.ingradientList;
+export const getIngredientsSelector = (store) => {
+  const error = store.ingredients.errorIngr;
+  const listload = store.ingredients.isLoad;
+  const ingredientList = store.ingredients.ingredientList;
   
   const ingradienstList = [];
   const newBurger = store.newBurger.newBurger;
@@ -39,20 +39,20 @@ export const getIngradientsSelector = (store) => {
       console.log(error);
     }
   } else {
-    ingradientList.forEach((item) => {
+    ingredientList.forEach((item) => {
         let number = 0;
-        newBurger.ingradients.map((element) => {
-         if (element.ingradient === item){
+        newBurger.ingredients.map((element) => {
+         if (element.ingredient === item){
           number = number + 1;
          } });
-      if (newBurger.bun.ingradientbun === item){
+      if (newBurger.bun.ingredientbun === item){
         number = number + 1;
       }
 
        ingradienstList.push({        
         number: number,
         id: 1,
-        ingradient: item,
+        ingredient: item,
       });
     });
   }
@@ -64,13 +64,13 @@ export const getNewBurgerSelector = (store) => {
   const NewBurgerID = [];
   const NewBurger = store.newBurger.newBurger;
   
-  let summ = NewBurger.bun.ingradientbun.price + NewBurger.bun.ingradientbun.price;
+  let summ = NewBurger.bun.ingredientbun.price + NewBurger.bun.ingredientbun.price;
   
-  NewBurgerID.push(NewBurger.bun.ingradientbun._id);
+  NewBurgerID.push(NewBurger.bun.ingredientbun._id);
   {
-    NewBurger.ingradients.map((item) => {
-      summ = summ + item.ingradient.price;
-      NewBurgerID.push(item.ingradient._id);
+    NewBurger.ingredients.map((item) => {
+      summ = summ + item.ingredient.price;
+      NewBurgerID.push(item.ingredient._id);
     });
   }
   const NewBurgerConstructor = {
@@ -84,10 +84,10 @@ export const getNewBurgerSelector = (store) => {
 };
 
 
-export const getIngradientsSelectornew = (store) => {
-  const error = store.ingradientsnew.errorIngr;
-  const listload = store.ingradientsnew.isLoad;
-  const ingradientList= store.ingradientsnew.ingradientList;
+export const getIngredientsSelectornew = (store) => {
+  const error = store.ingredientsnew.errorIngr;
+  const listload = store.ingredientsnew.isLoad;
+  const ingredientList= store.ingredientsnew.ingredientList;
   
   const ingradienstList = [];
    
@@ -97,11 +97,11 @@ export const getIngradientsSelectornew = (store) => {
       console.log(error);
     }
   } else {
-    ingradientList.forEach((item) => {
+    ingredientList.forEach((item) => {
         ingradienstList.push({        
         number: 0,
         id: 1,
-        ingradient: item,
+        ingredient: item,
       });
     });
   }

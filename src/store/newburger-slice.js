@@ -4,7 +4,7 @@ import { v4 as uuid } from 'uuid';
 const initialState = {
     newBurger:{ bun: {
                number:0,
-               ingradientbun: {
+               ingredientbun: {
               _id: "643d69a5c3f7b9001cfa093cn",
               name: "тут будет  ваша   булка       ",
               type: "bun",
@@ -18,11 +18,11 @@ const initialState = {
               image_large: "https://code.s3.yandex.net/react/code/bun-02-large.png",
               __v: 0,
             }},
-            ingradients: [
+            ingredients: [
               { 
                 number: 0,
                 id: uuid(),
-                ingradient:
+                ingredient:
               {
                 _id: "643d69a5c3f7b9001cfa0941n",
                 name: "Тут будет ваша котлета,соус и многое другое",
@@ -54,17 +54,17 @@ const newBurgerSlice = createSlice({
           console.log(action.payload);  
           const ingred = action.payload;
           ingred.id = uuid();
-          state.newBurger.ingradients.push(ingred);
+          state.newBurger.ingredients.push(ingred);
         },   
         addBun: (state, action) => {         
-          state.newBurger.bun.ingradientbun = action.payload},   
+          state.newBurger.bun.ingredientbun = action.payload},   
         delIngredient: (state, action) => {     
           console.log(action.payload); 
-          state.newBurger.ingradients.splice(action.payload,1)},  
+          state.newBurger.ingredients.splice(action.payload,1)},  
         changeIngredient: (state, action) => {   
           const {indexFrom, indexTo, ingredient} = action.payload;       
-          state.newBurger.ingradients.splice(indexFrom,1);
-          state.newBurger.ingradients.splice(indexTo,0,ingredient);
+          state.newBurger.ingredients.splice(indexFrom,1);
+          state.newBurger.ingredients.splice(indexTo,0,ingredient);
         }               
                
     }

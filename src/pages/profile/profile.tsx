@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import LinkProfile from "../../components/link-profile/link-profile";
 import styles from "./profile.module.css";
 import { Input,
     Button} from "@ya.praktikum/react-developer-burger-ui-components";
@@ -15,47 +14,35 @@ function Profile() {
 
   const dispatch = useDispatch();
 
-  const setValueEmail = (evt) =>{
+  const setValueEmail = (evt: any) =>{
     setEmail(evt.target.value)
   };
 
-  const setValuePassWord = (evt) =>{
+  const setValuePassWord = (evt: any) =>{
     setPassword(evt.target.value)
   };
 
-  const setValueName = (evt) =>{
+  const setValueName = (evt: any) =>{
     setName(evt.target.value)
   };
 
- const onClick = () =>{
-    dispatch(redact(email, name));
- };
-
  const onClickCansel = () =>{
-   const inputname = document.getElementById('name');
-   const inputemail = document.getElementById('login');
-   console.log(inputname);
-   console.log(inputemail);
-
-   inputname.setAttribute ("value",user.name);
-   inputemail.setAttribute ("value",user.email);
-   inputname.value = user.name;
-   inputemail.value = user.email;
+   
+   setEmail(user.email);
+   setName(user.name)
        
  };
 
+ const onSubmit = (evt: any) =>{
+  evt.preventDefault();
+  dispatch(redact(email, name));
+   
+ }
 
  return (     
     <div className={styles.profile}>
-      <menu className={styles.menu}>
-        <LinkProfile name="Профиль" to="/profile"></LinkProfile>
-        <LinkProfile name="История заказов" to="/profile/orders"></LinkProfile>
-        <LinkProfile name="Выход" to="/exit"></LinkProfile>
-
-        <p className="mt-20 text text_type_main-default text_color_inactive">
-          В этом разделе вы можете          изменить свои персональные данные</p>
-      </menu>
-      <form className={styles.userForm}>
+      
+      <form className={styles.userForm} onSubmit={onSubmit}>
         <Input
           type="text"
           placeholder="Имя"
@@ -109,7 +96,7 @@ function Profile() {
           Отмена
         </Button>
 
-        <Button htmlType="button" type="primary" size="medium" extraClass="mt-6" onClick={onClick}>
+        <Button htmlType="button" type="primary" size="medium" extraClass="mt-6" onClick={onSubmit}>
           Сохранить
         </Button>
         </div>

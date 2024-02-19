@@ -1,12 +1,14 @@
 import React from "react";
 import styles from "./link-login.module.css";
-import { Link, NavLink } from "react-router-dom";
-import { Input,
-  Button} from "@ya.praktikum/react-developer-burger-ui-components";
+import { Link } from "react-router-dom";
 
+type TLinLoginprops = {
+  qwest: string,
+  to: string,
+  text: string
+}
 
-
-function LinLogin(props) {
+function LinLogin(props:TLinLoginprops) {
   return (
     <div className={styles.newUser}>
       <p className="text text_type_main-default text_color_inactive">

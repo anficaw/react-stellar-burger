@@ -8,29 +8,44 @@ import styles from "./burger-list.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { getNewBurgerSelector } from "../../store/action-selector";
 import { changeIngredient, delIngredient} from "../../store/newburger-slice";
+import { TIngredients,TNewBurgerConstructor } from "../../types";
 
-const BurgerList = ({ card, index }) => {
+
+type ТBurgerIngredientprops = {
+  card:TIngredients,
+}
+
+type ТDragprops = {
+  ingredient:TIngredients,
+}
+
+
+type ТCollectedprops = {
+  isDragStart:boolean;
+}
+
+const BurgerList = (card: TIngredients, index:number, key:string) => {
   
   const dispatch = useDispatch();
 
-  const [{ isDragStart }, dragRef] = useDrag({
+  const [{ isDragStart }, dragRef] = useDrag<ТDragprops,unknown,ТCollectedprops>({
     type: "sort",
     item: { ingredient: card },
   });
   
   const newBurgerOrder = useSelector(getNewBurgerSelector);
-    const findIndex = (item) => {
-     return newBurgerOrder.newBurger.ingradients.indexOf(item);
+
+  const findIndex = (item:TIngredients) => {
+     return newBurgerOrder.newBurger.ingredients.indexOf(item);
   };
 
-  const [, dropRef] = useDrop({
+  const [, dropRef] = useDrop<ТDragprops,unknown,unknown >({
     accept: "sort",
     hover({ ingredient }) {
-    
+  
       if (card.id === ingredient.id) return;
        
       dispatch(changeIngredient({
-         
           indexFrom: findIndex(ingredient),
           indexTo: index,
           ingredient: ingredient,
@@ -41,23 +56,24 @@ const BurgerList = ({ card, index }) => {
   });
    
   const onDel = () => {
-    console.log("jhsjklfhlkjgslkgj")
-    
-    dispatch( delIngredient(index));     
+      dispatch( delIngredient(index));     
   }; 
+
+ if (!card.ingredient ) {
+  return null
+ }
 
   return (
     <div
-      className={`mr-2 ${styles.ingradientslist}`}
+      className={`mr-2 ${styles.ingredientslist}`}
       key={card.id}
       ref={(node) => dropRef(dragRef(node))}
     >
-      <DragIcon className="mr-2" />
+      <DragIcon type="primary"/>
       <ConstructorElement
-        text={card.ingradient.name}
-        price={card.ingradient.price}
-        thumbnail={card.ingradient.image_mobile}
-         
+        text={card.ingredient.name}
+        price={card.ingredient.price}
+        thumbnail={card.ingredient.image_mobile}
         handleClose={onDel}
       />
     </div>

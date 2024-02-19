@@ -1,27 +1,30 @@
 import React from "react";
 import styles from "./ingredient-details.module.css";
-import { useSelector } from "react-redux";
-import { getIngradientSelector } from "../../store/action-selector";
+import { TIngredient } from "../../types";
 
+type TIngredientDetailsprops = {
+  ingredient: TIngredient,
+}
 
-function IngredientDetails({ingradient}) {
-  
-  /*const ingradient = useSelector(getIngradientSelector);*/
+function IngredientDetails(props: TIngredientDetailsprops) {
+
+  const ingredient: TIngredient = props.ingredient;
 
   return (
+
     <section className={styles.ingredientdetails}>
       <p className=" mt-10 mr-10 text text_type_main-large">
         Детали ингредиента
       </p>
-      <img src={ingradient.image_large} alt={ingradient.name} />
-      <p className=" mt-4 mb-8 text text_type_main-medium">{ingradient.name}</p>
+      <img src={ingredient.image_large} alt={ingredient.name} />
+      <p className=" mt-4 mb-8 text text_type_main-medium">{ingredient.name}</p>
       <div className={styles.detales}>
         <div className={styles.detale}>
           <p className="  mb-2  text text_type_main-default text_color_inactive">
             Калории, ккал
           </p>
           <p className="text text_type_main-default text_color_inactive">
-            {ingradient.calories}
+            {ingredient.calories}
           </p>
         </div>
         <div className={styles.detale}>
@@ -29,7 +32,7 @@ function IngredientDetails({ingradient}) {
             Белки, г
           </p>
           <p className="  text text_type_main-default text_color_inactive">
-            {ingradient.proteins}
+            {ingredient.proteins}
           </p>
         </div>
         <div className={styles.detale}>
@@ -37,7 +40,7 @@ function IngredientDetails({ingradient}) {
             Жиры, г
           </p>
           <p className="   text text_type_main-default text_color_inactive">
-            {ingradient.fat}
+            {ingredient.fat}
           </p>
         </div>
         <div className={styles.detale}>
@@ -45,7 +48,7 @@ function IngredientDetails({ingradient}) {
             Углеводы, г
           </p>
           <p className="   text text_type_main-default text_color_inactive">
-            {ingradient.carbohydrates}
+            {ingredient.carbohydrates}
           </p>
         </div>
       </div>

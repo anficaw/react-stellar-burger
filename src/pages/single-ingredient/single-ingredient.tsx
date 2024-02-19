@@ -1,19 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import IngredientDetails from "../../components/ingredient-details/ingredient-details";
 import styles from "./single-ingredient.module.css";
-import { useParams, Route, Routes, useLocation, useNavigate } from "react-router-dom";
-import {getIngradientsSelector,
-  getIngradientsSelectornew,
+import { useParams, useLocation, useNavigate } from "react-router-dom";
+import {getIngredientsSelector,
+  getIngredientsSelectornew,
   } from "../../store/action-selector";
 import { useDispatch, useSelector } from "react-redux";
 
 import Modal from "../../components/modal/modal";
 import Main from "../../components/main/main";
-import { fetchListnew } from "../../store/ingradients-slicenew";
+import { fetchListnew } from "../../store/ingredients-slicenew";
+import { TIngredient, TIngredients} from "../../types";
 
 function SingleIngredient() {
-
-  const [one, setOne] = useState('2')
   const navigate = useNavigate(); 
   const location = useLocation();
   const background = location.state;
@@ -25,30 +24,24 @@ function SingleIngredient() {
     dispatch(fetchListnew());
   }, []);
 
-  const cards = useSelector(getIngradientsSelector);
-  const cardsnew = useSelector(getIngradientsSelectornew);
+  const cards:TIngredients[] = useSelector(getIngredientsSelector);
+  const cardsnew:TIngredients[] = useSelector(getIngredientsSelectornew);
 
   if (cards.length === 0) return null;
   if (cardsnew.length === 0) return null;
-   console.log('777777');
-    console.log(background);
-    console.log(cards);
-
-  
-  const ingradient= () =>{
+    
+  const ingredient = () =>{
     if (background){
-    const singl = cards.filter((item) => item.ingradient._id === ingId);
-    const ingrad = singl[0].ingradient;
-    console.log('666666');
-    console.log(ingrad);
-    return ingrad; }
+    const singl = cards.filter((item) => item.ingredient._id === ingId);
+    const ingrad: TIngredient = singl[0].ingredient;    
+    return ingrad }
+
     else{
-      const singl = cardsnew.filter((item) => item.ingradient._id === ingId);
-      const ingrad = singl[0].ingradient;
-      console.log('5555555555');
-      console.log(ingrad);
-      return ingrad; }
-     
+      const singl = cardsnew.filter((item) => item.ingredient._id === ingId);
+      const ingrad: TIngredient  = singl[0].ingredient;
+      return ingrad }
+
+    
   };
   
   const onClose = () => {
@@ -66,7 +59,7 @@ function SingleIngredient() {
       <div>
         <Main></Main>          
         <Modal onClose={onClose}>
-          <IngredientDetails ingradient={ingradient()} />
+          <IngredientDetails ingredient= {ingredient()} />
         </Modal>
       
       </div>
@@ -74,7 +67,7 @@ function SingleIngredient() {
   } else {
     return (
       <div className={styles.singleIngredient}>
-        <IngredientDetails ingradient={ingradient()}></IngredientDetails>
+        <IngredientDetails ingredient={ingredient()}></IngredientDetails>
       </div>
     );
   }

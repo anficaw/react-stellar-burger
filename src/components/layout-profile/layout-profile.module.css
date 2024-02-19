@@ -1,0 +1,42 @@
+.layoutprofilert {
+    display: flex;
+    margin: auto;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+  
+    max-width: 1280px;
+    background-color: rgba(0, 0, 0);
+    
+    color: #f2f2f3;
+  }
+  
+  .layoutprofile {
+    margin: 0;
+    width: 100%;
+    height: 575px;
+    
+    padding: 0;
+     
+    display: grid;
+    grid-template-columns: 320px 480px;
+    grid-gap: 150px;
+    justify-items:flex-start;
+    align-items:flex-start;
+    background-color: rgba(0, 0, 0);
+  
+  }
+  
+  .userForm{
+      display: flex;
+      flex-direction: column;
+  
+  }
+  
+  .buttons{
+      display: flex;
+      flex-direction: row;
+      justify-content: right;
+  }

@@ -1,27 +1,41 @@
 import styles from "./burger-ingredient.module.css";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useDispatch } from "react-redux";
-import { Link, NavLink,useSearchParams, useLocation } from "react-router-dom";
+ 
+import { Link, useLocation } from "react-router-dom";
 
 import { useDrag } from "react-dnd";
-import { addIng } from "../../store/ingradient-slice";
 
-function BurgerIngredient({ card }) {
+import { TIngredients } from "../../types";
+
+
+type ТBurgerIngredientprops = {
+  card:TIngredients,
+}
+
+type ТCollectedprops = {
+  isDragStart:boolean;
+}
+
+type ТDragprops = {
+  ingredient:TIngredients,
+}
+
+function BurgerIngredient(props:ТBurgerIngredientprops) {
    
+  const card:TIngredients = props.card;
+  
   const location = useLocation();
-
-  const [{ isDragStart }, dragRef] = useDrag({
+  
+  const [{ isDragStart }, dragRef] = useDrag<ТDragprops,unknown,ТCollectedprops>({
     type: "ing",
-    item: card,
+    item: { ingredient: card },
     
   });
-
-  
+ 
   return (
     <Link
-      /*state={{ background: true }}*/
-      to={`/ingredients/${card.ingradient._id}`}
-      key={card.ingradient._id}
+      to={`/ingredients/${card.ingredient._id}`}
+      key={card.ingredient._id}
       className={styles.burgerIngredient}
       state={{ background: location }}
       ref={dragRef}
@@ -29,19 +43,19 @@ function BurgerIngredient({ card }) {
     >
       <img
         className={styles.image}
-        alt={card.ingradient.name}
-        src={card.ingradient.image}
+        alt={card.ingredient.name}
+        src={card.ingredient.image}
         draggable="false"
 
       />
       <div className={styles.imageprice}>
         <div className=" mr-2 text text_type_digits-default">
-          {card.ingradient.price}
+          {card.ingredient.price}
         </div>
-        <CurrencyIcon />
+        <CurrencyIcon type="primary"/>
       </div>
       <div className={`text text_type_main-default ${styles.title}`}>
-        {card.ingradient.name}
+        {card.ingredient.name}
       </div>
 
       {card.number != 0 && (

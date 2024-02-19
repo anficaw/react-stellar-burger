@@ -2,14 +2,14 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { getIngredients } from "../utils/api";
 
 const initialState = {
-    ingradientList: [],
+    ingredientList: [],
     isLoad: false,
     errorIngr:'',
 
 }
 
-export const fetchList = createAsyncThunk(
-    'ingradients/get',
+export const fetchListnew = createAsyncThunk(
+    'ingredientsnew/get',
     async () => {
       const res = await getIngredients();
       const data = res.data;
@@ -18,21 +18,21 @@ export const fetchList = createAsyncThunk(
     }
   )
 
-const ingradientsSlice = createSlice({
-    name: 'ingradients',
+const ingredientsSlicenew = createSlice({
+    name: 'ingredientsnew',
     initialState: initialState,
    
     extraReducers: builder =>
     { builder
-         .addCase(fetchList.pending.type, (state, action) => {
+         .addCase(fetchListnew.pending.type, (state, action) => {
             state.isLoad = false;
             state.errorIngr  = '';
            })
-           .addCase (fetchList.fulfilled.type, (state, action) => {
-            state.ingradientList = action.payload;
+           .addCase (fetchListnew.fulfilled.type, (state, action) => {
+            state.ingredientList = action.payload;
             state.isLoad = true;
             })
-            .addCase (fetchList.rejected.type, (state, action) => {
+            .addCase (fetchListnew.rejected.type, (state, action) => {
             state.isLoad = false;
             state.errorIngr  = action.error.massage;
            })
@@ -41,4 +41,4 @@ const ingradientsSlice = createSlice({
 
 })
 
-export default ingradientsSlice.reducer;
+export default ingredientsSlicenew.reducer;

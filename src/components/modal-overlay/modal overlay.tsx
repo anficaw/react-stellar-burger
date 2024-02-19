@@ -1,11 +1,16 @@
 import React from "react";
 import styles from "./modal-overlay.module.css";
 
-function ModalOverlay({ onClose }) {
+type ТModalOverlayprops = {
+  onClose: any,
+}
+
+
+function ModalOverlay(props:ТModalOverlayprops) {
   return (
     <section
       className={`  ${styles.modaloverlay}`}
-      onClick={onClose}
+      onClick={props.onClose}
     ></section>
   );
 }

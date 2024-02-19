@@ -4,31 +4,31 @@ import { Input,
 import { login } from "../../store/action";
 import LinLogin from "../../components/link-login/link-login";
 import styles from "./login.module.css";
-import { Link, NavLink } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
 function Login() {
- const [email, setEmail] = useState('anficaw@mail.ru');
- const [password, setPassword] = useState('****');
+ const [email, setEmail] = useState('');
+ const [password, setPassword] = useState('');
  
  const dispatch = useDispatch();
 
-  const setValueEmail = (evt) =>{
+  const setValueEmail = (evt: any) =>{
     setEmail(evt.target.value)
   }
 
-  const setValuePassWord = (evt) =>{
+  const setValuePassWord = (evt: any) =>{
     setPassword(evt.target.value)
   }
 
- const onClick = () =>{
+ const onSubmit = (evt: any) =>{
+  evt.preventDefault();
   dispatch(login(email, password));
- }
 
+ }
 
     return (
         <div className={styles.login}>
-         <form className={styles.login}>
+         <form className={styles.login} onSubmit={onSubmit}>
             <p className="text text_type_main-medium">Вход</p>
             <Input
           type="email"
@@ -58,7 +58,7 @@ function Login() {
           size={"default"}
           extraClass="ml-1 mt-6"
         />
-        <Button onClick={onClick} htmlType="button" type="primary" size="medium" extraClass="mt-6 mb-20">
+        <Button onClick={onSubmit} htmlType="button" type="primary" size="medium" extraClass="mt-6 mb-20">
           Войти
         </Button>
 

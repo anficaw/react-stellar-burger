@@ -204,7 +204,7 @@ export const data = [
 export const newBurgerone = {
   bun: {
   number:0,
-  ingradientbun:{  
+  ingredientbun:{  
  _id: "643d69a5c3f7b9001cfa093cn",
  name: "тут будет  ваша   булка       ",
  type: "bun",
@@ -218,11 +218,11 @@ export const newBurgerone = {
  image_large: "https://code.s3.yandex.net/react/code/bun-02-large.png",
  __v: 0,
 }},
-ingradients: [
+ingredients: [
  { 
    number: 0,
    id: uuid(),
-   ingradient:
+   ingredient:
  {
    _id: "643d69a5c3f7b9001cfa0941n",
    name: "Тут будет ваша котлета,соус и многое другое",
@@ -258,7 +258,7 @@ export const NewBurgerone = {
      image_large: "https://code.s3.yandex.net/react/code/bun-02-large.png",
      __v: 0,
    },
-   ingradients: [
+   ingredients: [
      {
        _id: "643d69a5c3f7b9001cfa0941",
        name: "Биокотлета из марсианской Магнолии",
