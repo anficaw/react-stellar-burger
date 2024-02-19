@@ -7,7 +7,7 @@ const initialState = {
   errorOrder: "",
 };
 
-export const fetchOrder = createAsyncThunk("order/get", async (newBurgerID) => {
+export const fetchOrder =  createAsyncThunk("order/get", async (newBurgerID) => {
   const res = await getOrder(newBurgerID);
   const data = res.order.number;
   return data;
@@ -24,6 +24,7 @@ const orderSlice = createSlice({
   initialState: initialState,
   extraReducers: (builder) => {
     builder
+       
       .addCase(fetchOrder.pending.type, (state, action) => {
         state.orderisLoad = false;
         state.errorOrder = "";

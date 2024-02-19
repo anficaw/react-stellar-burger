@@ -81,9 +81,9 @@ export const login = (email, password) => {
         if (res.success) {
           localStorage.setItem("accessToken", res.accessToken);
           localStorage.setItem("refreshToken", res.refreshToken);
-          console.log("Получили токен");
+          /*console.log("Получили токен");
           console.log(res.refreshToken);
-          console.log(res.accessToken);
+          console.log(res.accessToken);*/
           dispatch(setUser(res.user));
         } else {
           return Promise.reject("Ошибка данных с скервера");

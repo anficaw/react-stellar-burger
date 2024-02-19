@@ -32,9 +32,11 @@ function OrderDetails(props:TOrderDetailstypeprops) {
   };
   
   
+
   useEffect (() => {
-    /*dispatch(fetchOrder());*/
-    dispatch(fetchOrder(newBurgerID));
+     // @ts-ignore: error message
+     dispatch(fetchOrder(newBurgerID));
+     
   }, [])
     
   const newOrder: string = useSelector(getOrderSelector); 

@@ -7,7 +7,7 @@ import {  useSelector } from "react-redux";
 
 const Protected = ({ onlyUnAuth = false, component }) => {
     
-  const isAuthChecked = useSelector((store) => store.user.isAuthChecked);
+  const isAuthChecked  = useSelector((store) => store.user.isAuthChecked);
   const user = useSelector((store) => store.user.user);
   const location = useLocation();
   const dispatch = useDispatch();
@@ -18,10 +18,10 @@ const Protected = ({ onlyUnAuth = false, component }) => {
   },[dispatch])
 
 
-  console.log('222222');
+  /*console.log('222222');
    console.log( user);
    console.log( localStorage.getItem("accessToken"));
-   console.log( localStorage.getItem("refreshToken"));
+   console.log( localStorage.getItem("refreshToken"));*/
 
 
 
