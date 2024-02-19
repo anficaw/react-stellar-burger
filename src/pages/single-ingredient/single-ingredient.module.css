@@ -1,0 +1,13 @@
+.singleIngredient {
+  margin: 0;
+  width: 640px;
+  height: 575px;
+  margin-top: 80px;
+  padding: 0;
+   
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  background-color: rgba(0, 0, 0);
+}
