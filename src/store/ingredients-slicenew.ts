@@ -1,14 +1,22 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction,createAsyncThunk} from "@reduxjs/toolkit";
 import { getIngredients } from "../utils/api";
+import { TIngredients, TIngredient } from '../types';
 
-const initialState = {
+type IngredientState = {
+    ingredientList:TIngredients[],
+    isLoad: boolean,
+    errorIngr:string,
+  }
+  
+
+const initialState:IngredientState = {
     ingredientList: [],
     isLoad: false,
     errorIngr:'',
 
 }
 
-export const fetchListnew = createAsyncThunk(
+export const fetchListnew = createAsyncThunk <TIngredients[],undefined,{rejectValue:string}>(
     'ingredientsnew/get',
     async () => {
       const res = await getIngredients();
@@ -19,22 +27,24 @@ export const fetchListnew = createAsyncThunk(
   )
 
 const ingredientsSlicenew = createSlice({
+
     name: 'ingredientsnew',
     initialState: initialState,
+    reducers:{},
    
     extraReducers: builder =>
     { builder
-         .addCase(fetchListnew.pending.type, (state, action) => {
+         .addCase(fetchListnew.pending, (state, ) => {
             state.isLoad = false;
             state.errorIngr  = '';
            })
-           .addCase (fetchListnew.fulfilled.type, (state, action) => {
+           .addCase (fetchListnew.fulfilled, (state, action) => {
             state.ingredientList = action.payload;
             state.isLoad = true;
             })
-            .addCase (fetchListnew.rejected.type, (state, action) => {
+            .addCase (fetchListnew.rejected, (state, action) => {
             state.isLoad = false;
-            state.errorIngr  = action.error.massage;
+            state.errorIngr  = 'error';
            })
     
     }

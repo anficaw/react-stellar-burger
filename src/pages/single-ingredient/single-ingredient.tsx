@@ -5,8 +5,7 @@ import { useParams, useLocation, useNavigate } from "react-router-dom";
 import {getIngredientsSelector,
   getIngredientsSelectornew,
   } from "../../store/action-selector";
-import { useDispatch, useSelector } from "react-redux";
-
+import { useAppDispatch,useAppSelector } from "../../types/hook";
 import Modal from "../../components/modal/modal";
 import Main from "../../components/main/main";
 import { fetchListnew } from "../../store/ingredients-slicenew";
@@ -17,15 +16,15 @@ function SingleIngredient() {
   const location = useLocation();
   const background = location.state;
   const { ingId } = useParams();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   
 
   useEffect(() => {
     dispatch(fetchListnew());
   }, []);
 
-  const cards:TIngredients[] = useSelector(getIngredientsSelector);
-  const cardsnew:TIngredients[] = useSelector(getIngredientsSelectornew);
+  const cards:TIngredients[] = useAppSelector(getIngredientsSelector);
+  const cardsnew:TIngredients[] = useAppSelector(getIngredientsSelectornew);
 
   if (cards.length === 0) return null;
   if (cardsnew.length === 0) return null;

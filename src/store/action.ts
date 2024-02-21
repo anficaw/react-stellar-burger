@@ -1,8 +1,15 @@
 import { setAuthChecked, setSentMessage, setUser } from "./user-slice";
 import { saitlogin, saituser, saittoken, saitregister,saitlogout, saitfogot, saitreset} from "../utils/data";
+import { TUser, TUserone} from "../types";
+import { AppDispath } from ".";
+
+const nullUser:TUserone = {
+  name:'name',
+  email:'email',
+}
 
 
-function checkResponse(res) {
+function checkResponse(res:Response) {
   if (res.ok) {
     return res.json();
   }
@@ -23,12 +30,14 @@ const refreshToken = () => {
   }).then(checkResponse);
 };
 
-const fetchwithRefresh = async (url, options) => {
+const fetchwithRefresh = async (url:string, options:any) => {
   try {
     const res = await fetch(url, options);
     return await checkResponse(res);
   } catch (err) {
-    if (err.massage === "jwt expired") {
+    console.log("ghjdthkjkjdsg");
+    console.log(err);
+    /*if (err.message === "jwt expired") {
       const refreshData = await refreshToken();
       if (!refreshData.success) {
         return Promise.reject(refreshData);
@@ -41,12 +50,12 @@ const fetchwithRefresh = async (url, options) => {
       return await checkResponse(res);
     } else {
       return Promise.reject(err);
-    }
+    }*/
   }
 };
 
 export const getUser = () => {
-  return (dispatch) => {
+  return (useAppDispatch:AppDispath) => {
     return fetchwithRefresh(saituser, {
       method: "GET",
       headers: {
@@ -55,7 +64,7 @@ export const getUser = () => {
       },
     }).then((res) => {
       if (res.success) {
-        dispatch(setUser(res.user));
+        useAppDispatch(setUser(res.user));
       } else {
         return Promise.reject("Ошибка данных с сервера");
       }
@@ -63,8 +72,8 @@ export const getUser = () => {
   };
 };
 
-export const login = (email, password) => {
-  return (dispatch) => {
+export const login = (email:string , password:string ) => {
+  return (useAppDispatch:AppDispath) => {
     return fetch(saitlogin, {
       method: "POST",
       headers: {
@@ -84,7 +93,7 @@ export const login = (email, password) => {
           /*console.log("Получили токен");
           console.log(res.refreshToken);
           console.log(res.accessToken);*/
-          dispatch(setUser(res.user));
+          useAppDispatch(setUser(res.user));
         } else {
           return Promise.reject("Ошибка данных с скервера");
         }
@@ -93,13 +102,13 @@ export const login = (email, password) => {
         console.log(err);
       })
       .finally(() => {
-        dispatch(setAuthChecked(true));
+        useAppDispatch(setAuthChecked(true));
       });
   };
 };
 
-export const registration = (email, password, name) => {
-  return (dispatch) => {
+export const registration = (email:string, password:string , name:string ) => {
+  return (useAppDispatch:AppDispath) => {
     return fetch(saitregister, {
       method: "POST",
       headers: {
@@ -120,7 +129,7 @@ export const registration = (email, password, name) => {
           console.log("Получили токен");
           console.log(res.refreshToken);
           console.log(res.accessToken);
-          dispatch(setUser(res.user));
+          useAppDispatch(setUser(res.user));
         } else {
           return Promise.reject("Ошибка данных с скервера");
         }
@@ -129,18 +138,28 @@ export const registration = (email, password, name) => {
         console.log(err);
       })
       .finally(() => {
-        dispatch(setAuthChecked(true));
+        useAppDispatch(setAuthChecked(true));
       });
   };
 };
 
-export const redact = (email, name) => {
-  return (dispatch) => {
+function token(){
+  const pppp=localStorage.getItem("accessToken");
+  if (pppp === null){
+    return "";
+  }else{
+    return pppp;
+  }
+}
+
+
+export const redact = (email:string , name:string) => {
+  return (useAppDispatch:AppDispath) => {
     return fetch(saituser, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
-        authorization: localStorage.getItem("accessToken"),
+        authorization: token(),
       },
       body: JSON.stringify({
         email: email,     
@@ -153,7 +172,7 @@ export const redact = (email, name) => {
           console.log("Обновили информацию");
           console.log(res.refreshToken);
           console.log(res.accessToken);
-          dispatch(setUser(res.user));
+          useAppDispatch(setUser(res.user));
         } else {
           return Promise.reject("Ошибка данных с скервера");
         }
@@ -162,14 +181,14 @@ export const redact = (email, name) => {
         console.log(err);
       })
       .finally(() => {
-        dispatch(setAuthChecked(true));
+        useAppDispatch(setAuthChecked(true));
       });
   };
 };
 
 export const exit = () => {
 
-  return (dispatch) => {
+  return (useAppDispatch:AppDispath) => {
     return fetch(saitlogout, {
       method: "POST",
       headers: {
@@ -187,7 +206,8 @@ export const exit = () => {
           localStorage.removeItem("refreshToken");
           console.log("Успешно вышли");
           console.log(res.message);
-          dispatch(setUser(null));
+          useAppDispatch(setUser(nullUser));
+          useAppDispatch(setAuthChecked(false));
         } else {
           return Promise.reject("Ошибка данных с скервера");
         }
@@ -196,14 +216,14 @@ export const exit = () => {
         console.log(err);
       })
       .finally(() => {
-        dispatch(setAuthChecked(false));
+        useAppDispatch(setAuthChecked(false));
       });
   };
 };
 
-export const fogot = (email) => {
+export const fogot = (email:string) => {
 
-  return (dispatch) => {
+  return (useAppDispatch:AppDispath) => {
     return fetch(saitfogot, {
       method: "POST",
       headers: {
@@ -227,13 +247,13 @@ export const fogot = (email) => {
         console.log(err);
       })
       .finally(() => {
-        dispatch(setSentMessage(true));
+        useAppDispatch(setSentMessage(true));
       });
   };
 };
 
-export const resetPass = (code, password) => {
-  return (dispatch) => {
+export const resetPass = (code:string, password:string) => {
+  return (useAppDispatch:AppDispath) => {
     return fetch(saitreset, {
       method: "POST",
       headers: {
@@ -259,23 +279,24 @@ export const resetPass = (code, password) => {
         console.log(err);
       })
       .finally(() => {
-        dispatch(setAuthChecked(false));
+        useAppDispatch(setAuthChecked(false));
       });
   };
 };
 
 export const checkUserAuth = () => {
-  return (dispatch) => {
+  return (useAppDispatch:AppDispath) => {
     if (localStorage.getItem("accessToken")) {
-      dispatch(getUser())
-        .catch((error) => {
+      useAppDispatch(getUser())
+        /*.catch((error) => {*/
+        .catch(() => {
           localStorage.removeItem("accessToken");
           localStorage.removeItem("refreshToken");
         })
-        .finally(() => dispatch(setAuthChecked(true)));
+        .finally(() => useAppDispatch(setAuthChecked(true)));
     } else {
-      dispatch(setAuthChecked(true));
-      dispatch(setUser(null));
+      useAppDispatch(setAuthChecked(true));
+      useAppDispatch(setUser(nullUser));
     }
   };
 };

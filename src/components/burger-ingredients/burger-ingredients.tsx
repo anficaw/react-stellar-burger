@@ -5,6 +5,7 @@ import TitleList from "../title-list/title-list";
 
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import {  useSelector } from "react-redux";
+import { useAppDispatch,useAppSelector } from "../../types/hook";
 import {
   getIngredientsSelector,
   getIngredientSelector,
@@ -16,7 +17,7 @@ function BurgerIngredients() {
  
   const [current, setCurrent] = useState("one");
 
-  const cards:TIngredients[] = useSelector(getIngredientsSelector);
+  const cards:TIngredients[] = useAppSelector(getIngredientsSelector);
 
   const onScrolling = () => {
     const vsection = document.getElementById("ingredients_list");

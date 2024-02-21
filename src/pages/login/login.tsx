@@ -12,15 +12,15 @@ function Login() {
  
  const dispatch = useDispatch();
 
-  const setValueEmail = (evt: any) =>{
+  const setValueEmail = (evt: React.ChangeEvent<HTMLInputElement>) =>{
     setEmail(evt.target.value)
   }
 
-  const setValuePassWord = (evt: any) =>{
+  const setValuePassWord = (evt: React.ChangeEvent<HTMLInputElement>) =>{
     setPassword(evt.target.value)
   }
 
- const onSubmit = (evt: any) =>{
+ const onSubmit = (evt: React.FormEvent) =>{
   evt.preventDefault();
   dispatch(login(email, password));
 
@@ -58,7 +58,7 @@ function Login() {
           size={"default"}
           extraClass="ml-1 mt-6"
         />
-        <Button onClick={onSubmit} htmlType="button" type="primary" size="medium" extraClass="mt-6 mb-20">
+        <Button htmlType="submit" type="primary" size="medium" extraClass="mt-6 mb-20">
           Войти
         </Button>
 

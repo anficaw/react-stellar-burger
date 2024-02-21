@@ -5,7 +5,7 @@ import {
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import LinLogin from "../../components/link-login/link-login";
-import { useDispatch } from "react-redux";
+import { useAppDispatch,useAppSelector } from "../../types/hook";
 import { registration } from "../../store/action";
 
 function Register() {
@@ -13,21 +13,21 @@ function Register() {
   const [password, setPassword] = useState("****");
   const [name, setName] = useState("Mark");
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
-  const setValueEmail = (evt: any) => {
+  const setValueEmail = (evt: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(evt.target.value);
   };
 
-  const setValuePassWord = (evt: any) => {
+  const setValuePassWord = (evt: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(evt.target.value);
   };
 
-  const setValueName = (evt: any) => {
+  const setValueName = (evt: React.ChangeEvent<HTMLInputElement>) => {
     setName(evt.target.value);
   };
 
-  const onSubmit = (evt: any) => {
+  const onSubmit = (evt: React.FormEvent) => {
     evt.preventDefault();
     dispatch(registration(email, password, name));
   };
@@ -81,11 +81,11 @@ function Register() {
         />
 
         <Button
-          htmlType="button"
+          htmlType="submit"
           type="primary"
           size="medium"
           extraClass="mt-6 mb-20"
-          onClick={onSubmit}
+     
         >
           Зарегистрироваться
         </Button>

@@ -1,6 +1,7 @@
 
 import { sait } from "./data";
 import { saitOrder} from "./data";
+import {ТnewBurgerID} from '../types';
 
 const config = {
   headers: {
@@ -9,28 +10,27 @@ const config = {
   },
 };
 
-export function checkResponse(res) {
+export function checkResponse(res:Response) {
       if (res.ok) {
       return res.json();
     }
     return Promise.reject(`ошибка ${res.status}`);
-
 }
 
 
 export const getIngredients= () => {
   return fetch(sait)
     .then(checkResponse)
-    /*.catch((err) => console.log(err));*/
+    
 };
 
-export const getOrder = (newBurgerID) => {
+export const getOrder = (newBurgerID:ТnewBurgerID) => {
   return fetch(saitOrder, {
     headers: config.headers,
     method: "POST",
     body: JSON.stringify(newBurgerID),
   })
     .then(checkResponse)
-    /*.catch((err) => console.log(err));*/
+    
 };
 

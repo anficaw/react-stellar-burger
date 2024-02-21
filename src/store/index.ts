@@ -1,8 +1,4 @@
-
-
-import { composeWithDevTools } from "redux-devtools-extension";
 import { configureStore } from "@reduxjs/toolkit";
-import { orderSlice } from "./order-slice";
 import ingredientReducer from "./ingredient-slice";
 import ingredientsReducer from "./ingredients-slice";
 import newburgerReducer from "./newburger-slice";
@@ -21,9 +17,7 @@ export const initialState = {
 
 }
 
-
-/*export const store = createStore(rootReducer,composeWithDevTools());*/
-export const store = configureStore({
+const store = configureStore({
   reducer:{
     ingredient: ingredientReducer,
     ingredients: ingredientsReducer,
@@ -31,7 +25,11 @@ export const store = configureStore({
     newBurger: newburgerReducer,
     order: orderReducer,
     user: userReducer,
-
   },
 
 })
+export default store;
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispath = typeof store.dispatch;
+
+

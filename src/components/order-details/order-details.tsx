@@ -1,14 +1,14 @@
 import React, { useEffect } from "react";
 import styles from "./order-details.module.css";
 import icon from "../../images/successIcon.svg";
-import { useDispatch,  } from "react-redux";
+ 
+import { useAppDispatch,useAppSelector } from "../../types/hook";
 import { getNewBurgerSelector, getOrderSelector} from "../../store/action-selector";
 import { fetchOrder } from "../../store/order-slice";
 import { TNewBurgerConstructor } from "../../types";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { getOrder } from "../../utils/api";
-import {  useSelector } from "react-redux";
-
+ 
 type TOrderDetailstypeprops = {
   one: string,
   two: string,
@@ -16,30 +16,27 @@ type TOrderDetailstypeprops = {
 }
 
 type ТnewBurgerID = {
-  ingredients:string[],
-}
+  ingredients:string[],};
+
 
 
 function OrderDetails(props:TOrderDetailstypeprops) {
 
-
-  
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
  
-  const newBurgerOrder: TNewBurgerConstructor = useSelector(getNewBurgerSelector);
-  const newBurgerID: ТnewBurgerID= {
+  const newBurgerOrder: TNewBurgerConstructor = useAppSelector(getNewBurgerSelector);
+  const newBurgerID: ТnewBurgerID = {
     ingredients: newBurgerOrder.newBurgerID,
   };
   
-  
-
+  console.log('555555555');
+  console.log(newBurgerID);
   useEffect (() => {
-     // @ts-ignore: error message
      dispatch(fetchOrder(newBurgerID));
      
   }, [])
     
-  const newOrder: string = useSelector(getOrderSelector); 
+  const newOrder: string = useAppSelector(getOrderSelector); 
 
   return (
     <section className={styles.orderDetails}>

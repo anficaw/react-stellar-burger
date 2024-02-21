@@ -1,36 +1,33 @@
 import { Navigate, useLocation } from "react-router-dom";
-import { useDispatch,  } from "react-redux";
-import React, { useEffect } from "react";
+import React, { FunctionComponent, useEffect } from "react";
 import { setAuthChecked } from "../../store/user-slice";
 import { checkUserAuth } from "../../store/action";
-import {  useSelector } from "react-redux";
+import { useAppDispatch,useAppSelector } from "../../types/hook";
 
-const Protected = ({ onlyUnAuth = false, component }) => {
+type ТProtectedprops = {
+  onlyUnAuth:boolean,
+  component:FunctionComponent,
+}
+
+const Protected = (props:ТProtectedprops) => {
     
-  const isAuthChecked  = useSelector((store) => store.user.isAuthChecked);
-  const user = useSelector((store) => store.user.user);
+  const isAuthChecked  = useAppSelector((store) => store.user.isAuthChecked);
+  const user = useAppSelector((store) => store.user.user);
   const location = useLocation();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(setAuthChecked(false))
     dispatch(checkUserAuth())
   },[dispatch])
 
-
-  /*console.log('222222');
-   console.log( user);
-   console.log( localStorage.getItem("accessToken"));
-   console.log( localStorage.getItem("refreshToken"));*/
-
-
-
+  
   if (!isAuthChecked) {
     // Запрос еще выполняется
     return null; // или прелоадер
   }
 
-  if (onlyUnAuth && user) {
+  if (props.onlyUnAuth && user) {
     
     // Пользователь авторизован, но запрос предназначен только для неавторизованных пользователей
     // Нужно сделать редирект на главную страницу или на тот адрес, что записан в location.state.from
@@ -38,7 +35,7 @@ const Protected = ({ onlyUnAuth = false, component }) => {
     return <Navigate to={from} />;
   }
 
-  if (!onlyUnAuth && !user) {
+  if (!props.onlyUnAuth && !user) {
     // Сервер не ответил
     return <Navigate to="/login" state={{ from: location }} />;
   }

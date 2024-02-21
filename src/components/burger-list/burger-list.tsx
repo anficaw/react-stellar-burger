@@ -6,6 +6,7 @@ import {
 import { useDrag, useDrop } from "react-dnd";
 import styles from "./burger-list.module.css";
 import { useDispatch, useSelector } from "react-redux";
+import { useAppDispatch,useAppSelector } from "../../types/hook";
 import { getNewBurgerSelector } from "../../store/action-selector";
 import { changeIngredient, delIngredient} from "../../store/newburger-slice";
 import { TIngredients,TNewBurgerConstructor } from "../../types";
@@ -31,14 +32,14 @@ type ТBurgerListprops = {
 
 const BurgerList = (props:ТBurgerListprops) => {
   
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const [{ isDragStart }, dragRef] = useDrag<ТDragprops,unknown,ТCollectedprops>({
     type: "sort",
     item: { ingredient: props.card },
   });
   
-  const newBurgerOrder:TNewBurgerConstructor = useSelector(getNewBurgerSelector);
+  const newBurgerOrder:TNewBurgerConstructor = useAppSelector(getNewBurgerSelector);
 
   const findIndex = (item:TIngredients) => {
      return newBurgerOrder.newBurger.ingredients.indexOf(item);

@@ -4,37 +4,39 @@ import { Input,
     Button} from "@ya.praktikum/react-developer-burger-ui-components";
 import { getUserActive } from "../../store/action-selector";
 import { redact } from "../../store/action";
-import { useDispatch, useSelector } from "react-redux";
-import { TUserT } from "../../types";
+import { useAppDispatch,useAppSelector } from "../../types/hook";
+import { TUser } from "../../types";
+import { string } from "prop-types";
  
 function Profile() {
-  const user: TUserT = useSelector(getUserActive);
+  const dispatch = useAppDispatch();
+  const user = useAppSelector(getUserActive);
+  
   const [email, setEmail] = useState(user.email);
   const [password, setPassword] = useState('');
   const [name, setName] = useState(user.name);
 
-  const dispatch = useDispatch();
+  
 
-  const setValueEmail = (evt: any) =>{
+  const setValueEmail = (evt: React.ChangeEvent<HTMLInputElement>) =>{
     setEmail(evt.target.value)
   };
 
-  const setValuePassWord = (evt: any) =>{
+  const setValuePassWord = (evt:React.ChangeEvent<HTMLInputElement>) =>{
     setPassword(evt.target.value)
   };
 
-  const setValueName = (evt: any) =>{
+  const setValueName = (evt: React.ChangeEvent<HTMLInputElement>) =>{
     setName(evt.target.value)
   };
 
  const onClickCansel = () =>{
-   
    setEmail(user.email);
    setName(user.name)
        
  };
 
- const onSubmit = (evt: any) =>{
+ const onSubmit = (evt: React.FormEvent) =>{
   evt.preventDefault();
   dispatch(redact(email, name));
    
@@ -97,7 +99,7 @@ function Profile() {
           Отмена
         </Button>
 
-        <Button htmlType="button" type="primary" size="medium" extraClass="mt-6" onClick={onSubmit}>
+        <Button htmlType="submit" type="primary" size="medium" extraClass="mt-6">
           Сохранить
         </Button>
         </div>

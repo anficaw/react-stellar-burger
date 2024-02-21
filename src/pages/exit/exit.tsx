@@ -1,12 +1,10 @@
 import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import { exit } from "../../store/action";
-
 import styles from "./exit.module.css";
-
-import { useDispatch } from "react-redux";
+import { useAppDispatch } from "../../types/hook";
 
 function Exit() {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const onClick = () => {
     dispatch(exit());

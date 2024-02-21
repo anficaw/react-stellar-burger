@@ -9,8 +9,8 @@ import Icon from "../../images/icon 36x36.svg";
 import Modal from "../modal/modal";
 import OrderDetails from "../order-details/order-details";
 import BurgerList from "../burger-list/burger-list";
+import { useAppDispatch,useAppSelector } from "../../types/hook";
 
-import { useDispatch, useSelector } from "react-redux";
 import { getNewBurgerSelector, getUserActive } from "../../store/action-selector";
  
 import {
@@ -35,12 +35,12 @@ let okThree: string|JSX.Element = "Дождитесь готовности на 
 
 
 function BurgerConstructor() {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
-  const newBurgerOrder:TNewBurgerConstructor = useSelector(getNewBurgerSelector);
+  const newBurgerOrder:TNewBurgerConstructor = useAppSelector(getNewBurgerSelector);
   
-  const user:TUser = useSelector(getUserActive);
-
+  const user = useAppSelector(getUserActive);
+   
   const NewBurgerCost = newBurgerOrder.newBurgerCost;
 
   const [isModalOpen, setModalOpen] = useState(false);

@@ -4,7 +4,7 @@ import AppHeader from "../app-header/app-header";
 import Main from "../main/main";
 import { useEffect } from "react";
 import { Routes, Route,useLocation, Navigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useAppDispatch } from "../../types/hook";
 import { fetchList } from "../../store/ingredients-slice";
 import NotFound from "../../pages/not-found/not-found";
 import ForgotPassword from "../../pages/forgot-password/forgot-password";
@@ -21,7 +21,7 @@ import Exit from "../../pages/exit/exit";
 import LayOutProfile from "../layout-profile/layout-profile";
 
 function App() {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
  useEffect(() => {
     dispatch(fetchList());

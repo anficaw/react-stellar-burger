@@ -14,7 +14,7 @@ function AppHeader() {
       <div className={styles.headerblockleft}>
         <LinkHeader name="Конструктор" icon={BurgerIcon} to='/' />
         <div className="ml-2">
-        <LinkHeader name="Лента заказов" icon={ListIcon} to='/profile/orders' />
+        <LinkHeader name="Лента заказов" icon={ListIcon} to='/feed' />
         </div>
       </div>
       <div className={styles.headerblockcentr}>

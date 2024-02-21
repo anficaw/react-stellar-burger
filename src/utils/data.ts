@@ -1,16 +1,24 @@
+// @ts-ignore: error message
 import { v4 as uuid } from 'uuid';
+const BASE_URL ="https://norma.nomoreparties.space/api/"
+export const sait= BASE_URL+ "ingredients";
+export const saitOrder= BASE_URL + "orders";
+export const saitfogot= BASE_URL + "password-reset";
+export const saitreset= BASE_URL + "password-reset/reset";
+export const saitregister= BASE_URL + "auth/register";
+export const saitlogin= BASE_URL + "auth/login";
+export const saitlogout= BASE_URL + "auth/logout";
+export const saittoken= BASE_URL + "auth/token";
+export const saituser= BASE_URL + "auth/user";
 
-export const sait= "https://norma.nomoreparties.space/api/ingredients";
-export const saitOrder= "https://norma.nomoreparties.space/api/orders";
+/*export const saitOrder= "https://norma.nomoreparties.space/api/orders";
 export const saitfogot= "https://norma.nomoreparties.space/api/password-reset";
 export const saitreset= "https://norma.nomoreparties.space/api/password-reset/reset";
 export const saitregister= "https://norma.nomoreparties.space/api/auth/register";
 export const saitlogin= "https://norma.nomoreparties.space/api/auth/login";
 export const saitlogout= "https://norma.nomoreparties.space/api/auth/logout";
 export const saittoken= "https://norma.nomoreparties.space/api/auth/token";
-export const saituser= "https://norma.nomoreparties.space/api/auth/user";
-
-
+export const saituser= "https://norma.nomoreparties.space/api/auth/user";*/
 
 
 

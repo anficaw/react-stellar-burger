@@ -1,21 +1,21 @@
-import { v4 as uuid } from 'uuid';
-import { setAuthChecked, setUser } from "./user-slice";
-import { getuplogin } from '../utils/api';
+import { RootState } from ".";
+import { TIngredients } from "../types";
 
-export const getIngredientSelector = (store) => store.ingredient.ingredient;
 
-export const getUserActive = (store) => store.user.user;
+export const getIngredientSelector = (store:RootState) => store.ingredient.ingredient;
+
+export const getUserActive = (store:RootState) => store.user.user;
 
 /*export const getUserMessage = (store) => store.user.isSentMessage;*/
 
-export const getOrderSelector = (store) =>{
+export const getOrderSelector = (store:RootState) =>{
   const error = store.order.errorOrder;
   const listload = store.order.orderisLoad;
   const order = store.order.order;
    
   if (listload === false) {
     console.log("Идет загрузка заказа и получение номера");
-    if (error === true) {
+    if (error === "error") {
       console.log(error);
       console.log("какая то ошибка");
     }}
@@ -25,23 +25,24 @@ export const getOrderSelector = (store) =>{
   return order;
 };
 
-export const getIngredientsSelector = (store) => {
+export const getIngredientsSelector = (store:RootState) => {
   const error = store.ingredients.errorIngr;
   const listload = store.ingredients.isLoad;
   const ingredientList = store.ingredients.ingredientList;
   
-  const ingradienstList = [];
+  const ingradienstList:TIngredients[] = [];
   const newBurger = store.newBurger.newBurger;
 
   if (listload === false) {
     console.log("Идет загрузка ингредиентов");
-    if (error === true) {
+    if (error === "error") {
       console.log(error);
     }
   } else {
     ingredientList.forEach((item) => {
         let number = 0;
         newBurger.ingredients.map((element) => {
+
          if (element.ingredient === item){
           number = number + 1;
          } });
@@ -51,7 +52,7 @@ export const getIngredientsSelector = (store) => {
 
        ingradienstList.push({        
         number: number,
-        id: 1,
+        id:' 1',
         ingredient: item,
       });
     });
@@ -60,7 +61,7 @@ export const getIngredientsSelector = (store) => {
   return ingradienstList;
 };
 
-export const getNewBurgerSelector = (store) => {
+export const getNewBurgerSelector = (store:RootState) => {
   const NewBurgerID = [];
   const NewBurger = store.newBurger.newBurger;
   
@@ -84,24 +85,24 @@ export const getNewBurgerSelector = (store) => {
 };
 
 
-export const getIngredientsSelectornew = (store) => {
+export const getIngredientsSelectornew = (store:RootState) => {
   const error = store.ingredientsnew.errorIngr;
   const listload = store.ingredientsnew.isLoad;
   const ingredientList= store.ingredientsnew.ingredientList;
   
-  const ingradienstList = [];
+  const ingradienstList:TIngredients[] = [];
    
   if (listload === false) {
     console.log("Идет загрузка ингредиентов в другое хранилище");
-    if (error === true) {
+    if (error === "error") {
       console.log(error);
     }
   } else {
     ingredientList.forEach((item) => {
         ingradienstList.push({        
         number: 0,
-        id: 1,
-        ingredient: item,
+        id:' 1',
+        ingredient: item.ingredient,
       });
     });
   }

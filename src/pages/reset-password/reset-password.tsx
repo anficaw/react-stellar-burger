@@ -5,24 +5,24 @@ import {
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import LinLogin from "../../components/link-login/link-login";
-import { useDispatch } from "react-redux";
+import { useAppDispatch,useAppSelector } from "../../types/hook";
 import { resetPass } from "../../store/action";
 
 function ResetPassword() {
   const [code, setCode] = useState("");
   const [password, setPassword] = useState("");
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
-  const setValueCode = (evt: any) => {
+  const setValueCode = (evt: React.ChangeEvent<HTMLInputElement>) => {
     setCode(evt.target.value);
   };
 
-  const setValuePassWord = (evt: any) => {
+  const setValuePassWord = (evt: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(evt.target.value);
   };
 
-  const onSubmit = (evt: any) => {
+  const onSubmit = (evt: React.FormEvent) => {
     evt.preventDefault();
     dispatch(resetPass(code, password));
   };
@@ -63,11 +63,11 @@ function ResetPassword() {
         />
 
         <Button
-          htmlType="button"
+          htmlType="submit"
           type="primary"
           size="medium"
           extraClass="mt-6 mb-20"
-          onClick={onSubmit}
+          
         >
           Сохранить
         </Button>

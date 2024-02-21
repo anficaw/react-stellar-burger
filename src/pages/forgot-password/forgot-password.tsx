@@ -5,7 +5,7 @@ import {
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import LinLogin from "../../components/link-login/link-login";
-import { useDispatch } from "react-redux";
+import { useAppDispatch,useAppSelector } from "../../types/hook";
 import { fogot } from "../../store/action";
 import { useNavigate } from "react-router-dom";
 const user = {};
@@ -14,17 +14,13 @@ function ForgotPassword() {
   const [email, setEmail] = useState("anficaw@mail.ru");
 
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
-  const setValueEmail = (evt: any) => {
+  const setValueEmail = (evt: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(evt.target.value);
   };
 
-  const onClick = () => {
-    dispatch(fogot(email));
-    navigate("/resetpassword");
-  };
-  const onSubmit = (evt: any) => {
+  const onSubmit = (evt: React.FormEvent) => {
     evt.preventDefault();
     dispatch(fogot(email));
     navigate("/resetpassword");
@@ -51,11 +47,11 @@ function ForgotPassword() {
         />
 
         <Button
-          htmlType="button"
+          htmlType="submit"
           type="primary"
           size="medium"
           extraClass="mt-6 mb-20"
-          onClick={onSubmit}
+           
         >
           Восстановить
         </Button>

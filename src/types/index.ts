@@ -32,19 +32,22 @@ export type TIngredient = {
     newBurgerCost: number,
     newBurgerID: string[] }
 
-    
-    export type TUser = {
-      user: {
-        name:string,
-        password:string,
-        email:string
 
-      },
+export type TUserone = {
+      name:string,
+      email:string
+    }
+    
+export type TUser = {
+      user: TUserone,
       isAuthChecked: boolean,
       isSentMessage: boolean }
        
-      export type TUserT = {
+export type TUserT = {
           name:string,
           email:string
-         }      
+         }
+export type ТnewBurgerID = {
+    ingredients:string[],};
+                      
           

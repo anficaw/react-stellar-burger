@@ -14,7 +14,7 @@ type TModalprops = {
 
 function Modal(props:TModalprops) {
   useEffect(() => {
-    function onEsc(evt:any) {
+    function onEsc(evt:KeyboardEvent) {
       if (evt.code === "Escape") {
         props.onClose();
       }
