@@ -3,17 +3,17 @@ import { saitlogin, saituser, saittoken, saitregister,saitlogout, saitfogot, sai
 import { TUser, TUserone} from "../types";
 import { AppDispath } from ".";
 
-const nullUser:TUserone = {
-  name:'name',
-  email:'email',
+const nullUser=null;
+type Terr ={
+  message:string,
+  success:boolean
 }
-
 
 function checkResponse(res:Response) {
   if (res.ok) {
     return res.json();
   }
-  return res.json().then((err) => Promise.reject(err));
+  return res.json().then((err:Terr) => Promise.reject(err));
 }
 
 
@@ -30,6 +30,7 @@ const refreshToken = () => {
   }).then(checkResponse);
 };
 
+
 const fetchwithRefresh = async (url:string, options:any) => {
   try {
     const res = await fetch(url, options);
@@ -37,20 +38,25 @@ const fetchwithRefresh = async (url:string, options:any) => {
   } catch (err) {
     console.log("ghjdthkjkjdsg");
     console.log(err);
-    /*if (err.message === "jwt expired") {
+      // @ts-ignore: error message 
+    if (err.message === "jwt expired") {
       const refreshData = await refreshToken();
       if (!refreshData.success) {
         return Promise.reject(refreshData);
       }
+      
       localStorage.setItem("accessToken", refreshData.accessToken);
       localStorage.setItem("refreshToken", refreshData.refreshToken);
+      console.log("Получили токен");
+      console.log(refreshData.refreshToken);
+      console.log(refreshData.accessToken);
 
       options.headers.authorization = refreshData.accessToken;
       const res = await fetch(url, options);
       return await checkResponse(res);
     } else {
       return Promise.reject(err);
-    }*/
+    }
   }
 };
 
@@ -90,12 +96,12 @@ export const login = (email:string , password:string ) => {
         if (res.success) {
           localStorage.setItem("accessToken", res.accessToken);
           localStorage.setItem("refreshToken", res.refreshToken);
-          /*console.log("Получили токен");
+          console.log("Получили токен");
           console.log(res.refreshToken);
-          console.log(res.accessToken);*/
+          console.log(res.accessToken);
           useAppDispatch(setUser(res.user));
         } else {
-          return Promise.reject("Ошибка данных с скервера");
+          return Promise.reject("Ошибка данных с сервера");
         }
       })
       .catch((err) => {
@@ -170,8 +176,8 @@ export const redact = (email:string , name:string) => {
       .then((res) => {
         if (res.success) {
           console.log("Обновили информацию");
-          console.log(res.refreshToken);
-          console.log(res.accessToken);
+         // console.log(res.refreshToken);
+         // console.log(res.accessToken);
           useAppDispatch(setUser(res.user));
         } else {
           return Promise.reject("Ошибка данных с скервера");
@@ -206,6 +212,7 @@ export const exit = () => {
           localStorage.removeItem("refreshToken");
           console.log("Успешно вышли");
           console.log(res.message);
+          console.log(localStorage.getItem("refreshToken"));
           useAppDispatch(setUser(nullUser));
           useAppDispatch(setAuthChecked(false));
         } else {

@@ -8,7 +8,9 @@ function Exit() {
 
   const onClick = () => {
     dispatch(exit());
+    
   };
+
   return (
     <div className={styles.exit}>
       <Button

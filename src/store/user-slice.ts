@@ -2,10 +2,7 @@ import { createSlice, PayloadAction} from "@reduxjs/toolkit";
 import { TUser, TUserone} from "../types";
 
 const initialState: TUser = {
-    user: {
-      name:"name",
-      email:"email"
-    },
+    user: null,
     isAuthChecked: false,
     isSentMessage: false,
   };
@@ -17,7 +14,7 @@ const initialState: TUser = {
       setAuthChecked: (state, action:PayloadAction<boolean>) => {
         state.isAuthChecked = action.payload;
       },
-      setUser: (state, action:PayloadAction<TUserone>) => {
+      setUser: (state, action:PayloadAction<TUserone|null>) => {
         state.user = action.payload;
       },
       setSentMessage: (state, action:PayloadAction<boolean>) => {

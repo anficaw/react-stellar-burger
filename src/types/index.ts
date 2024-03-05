@@ -39,7 +39,7 @@ export type TUserone = {
     }
     
 export type TUser = {
-      user: TUserone,
+      user: TUserone|null,
       isAuthChecked: boolean,
       isSentMessage: boolean }
        
@@ -49,5 +49,73 @@ export type TUserT = {
          }
 export type ТnewBurgerID = {
     ingredients:string[],};
+
+export type TlineOrder = {
+ ingredients: TIngredient [],
+ _id:string,
+ name:string
+ status:string,
+ number: number,
+ createdAt:string,
+ updatedAt:string
+}   
+
+export type TOrder = {
+  ingredients: TOrderIngredient [],
+  _id:string,
+  name:string
+  status:string,
+  number: number,
+  createdAt:string,
+  updatedAt:string,
+  summ:number,
+ }  
+ export type TOrderIngredient = {
+  ingredient: TIngredient,
+  amount:number,
+   
+ }   
+
+ export type OrderString = {
+  order:string
+}
+ 
+
+export type TlineOrderst = {
+  ingredients: string[],
+  _id:string,
+  name:string
+  status:string,
+  number: number,
+  createdAt:string,
+  updatedAt:string
+ }   
+
+export type TlineOrderall = {
+  success: boolean,
+  orders: TlineOrder[],
+  total: number,
+  totalToday: number
+ 
+ }   
+
+ export type TlineOrderunic = {
+  success: boolean,
+  orders:[
+      {
+        ingredients:string [],
+        _id: string,
+        status: string,
+        number: number,
+        name:string,
+        createdAt:string,
+        updatedAt: string
+      }
+    ],
+    total: number,
+    totalToday: number
+  }
+  
+
                       
           

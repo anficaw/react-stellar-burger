@@ -1,0 +1,122 @@
+.order {
+    margin: 0;
+    padding: 0;
+    width: 640px;
+    display: flex;
+    flex-direction: column;
+    justify-content:center;
+    align-content: center;
+}
+
+.title{
+  margin: 0;
+  padding: 0;
+  padding-bottom: 40px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  justify-items: center;
+}
+
+.text{
+  margin: auto;
+  padding: 0;
+  width: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  justify-items: center;
+}
+
+.textblue{
+  color: aqua;
+}
+
+.component{
+    margin: 0;
+    padding: 0;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-right: 10px;
+    height: 70px;
+    display: flex;
+    flex-direction: row;
+    justify-content:space-between;
+    align-items: center;
+    
+}
+
+.list {
+    width: 99%;
+    max-height: 300px;
+    display: flex;
+    margin: 0;
+    padding: 0;
+    padding-bottom: 40px;
+    flex-direction: column;
+    justify-content: flex-start;
+    overflow: scroll;
+    overflow-x: hidden;
+  }
+
+  .image {
+    max-width: 112px;
+    position: relative;
+    z-index: 0;
+    right: 22px;
+  }
+.ring{
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: right;
+   
+   
+}
+.preview {
+    height: 64px;
+    width: 64px;
+    z-index: 0;
+    background-color: rgba(28, 28, 33, 1);
+    border-radius: 100px;
+    border: 2px solid #5a5f99;
+    display: flex;
+    position: relative;
+  }
+  .podval{
+    margin: 0;
+    padding: 0;
+    padding-top: 40px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+.name{
+    margin: 0;
+    padding: 0;
+    padding-left: 80px;
+
+}
+.nameall{
+  margin: 0;
+  padding: 0;
+  padding-left: 15px;
+  padding-right: 10px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.namebottom{
+  margin: 0;
+  padding: 0;
+  padding-left: 15px;
+  padding-right: 10px; 
+  display: flex;
+  flex-direction: row;
+  justify-content:end;
+}

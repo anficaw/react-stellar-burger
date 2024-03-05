@@ -1,11 +1,169 @@
 import { RootState } from ".";
-import { TIngredients } from "../types";
+import { TIngredients,TOrder, TIngredient,TOrderIngredient } from "../types";
 
 
 export const getIngredientSelector = (store:RootState) => store.ingredient.ingredient;
-
+export const getconnectActive = (store:RootState) => store.orders.status;
 export const getUserActive = (store:RootState) => store.user.user;
+export const getUserReg = (store:RootState) => store.user.isAuthChecked;
+//export const getOrderNew = (store:RootState) => store.ordernew.order;
+//********************************************************************* */
+export const getOrderNew = (state: RootState) => {
 
+  const ordernew = state.ordernew.order;
+  const cardsnew = state.ingredientsnew.ingredientList;
+  
+  
+   if (ordernew ===null){
+    return null;
+   }
+  
+     const ingradString = ordernew.ingredients;
+     let ingredientsinorder:TOrderIngredient[]=[];
+     
+     
+     let summa = 0;
+     {ingradString.map((element) => 
+        {
+         let ingredientinorder:TIngredient|undefined; 
+         let ingredientinordertwo:TOrderIngredient|undefined; 
+
+         ingredientinorder = cardsnew.find(el => el._id === element);
+         ingredientinordertwo = ingredientsinorder.find(eln => eln.ingredient === ingredientinorder);
+            if (ingredientinorder && ingredientinordertwo){
+              ingredientinordertwo.amount += 1;
+              summa = summa + ingredientinorder.price;
+            }else if (ingredientinorder)
+              {let num:TOrderIngredient = {
+              ingredient:ingredientinorder,
+              amount:1};           
+              ingredientsinorder.push(num);
+              summa = summa + ingredientinorder.price;
+            } 
+        }
+     )} 
+     let order:TOrder ={
+      _id: ordernew._id,
+     createdAt: ordernew.createdAt,
+     ingredients: ingredientsinorder,
+     name: ordernew.name,
+     number: ordernew.number,
+     status: ordernew.status,
+     summ: summa,
+     updatedAt: ordernew.updatedAt,
+     };
+
+return order
+}    
+//****************************************************************** */
+export const selectUserOrders = (state: RootState) => {
+  const listOrder = state.orders.orders;
+  const cardsnew = state.ingredientsnew.ingredientList;
+  const orders:TOrder[] =[];
+  
+
+ {listOrder.map((item) => 
+    { 
+     const ingradString = item.ingredients;
+     let ingredientsinorder:TOrderIngredient[]=[];
+     
+     
+     let summa = 0;
+     {ingradString.map((element) => 
+        {
+         let ingredientinorder:TIngredient|undefined; 
+         let ingredientinordertwo:TOrderIngredient|undefined; 
+
+         ingredientinorder = cardsnew.find(el => el._id === element);
+         ingredientinordertwo = ingredientsinorder.find(eln => eln.ingredient === ingredientinorder);
+            if (ingredientinorder && ingredientinordertwo){
+              ingredientinordertwo.amount += 1;
+              summa = summa + ingredientinorder.price;
+            }else if (ingredientinorder)
+              {let num:TOrderIngredient = {
+              ingredient:ingredientinorder,
+              amount:1};           
+              ingredientsinorder.push(num);
+              summa = summa + ingredientinorder.price;
+            } 
+        }
+     )} 
+     
+     let order:TOrder ={
+      _id: item._id,
+     createdAt: item.createdAt,
+     ingredients: ingredientsinorder,
+     name: item.name,
+     number: item.number,
+     status: item.status,
+     summ: summa,
+     updatedAt: item.updatedAt,
+     };
+
+     orders.push(order);
+   }
+ )}
+ orders.reverse();
+return orders
+}
+
+//****************************************************************** */
+
+export const selectOrders = (state: RootState) => {
+    const listOrder = state.orders.orders;
+    const cardsnew = state.ingredientsnew.ingredientList;
+    const orders:TOrder[] =[];
+
+   {listOrder.map((item) => 
+      { 
+       const ingradString = item.ingredients;
+       let ingredientsinorder:TOrderIngredient[]=[];
+       
+       
+       let summa = 0;
+       {ingradString.map((element) => 
+          {
+           let ingredientinorder:TIngredient|undefined; 
+           let ingredientinordertwo:TOrderIngredient|undefined; 
+
+           ingredientinorder = cardsnew.find(el => el._id === element);
+           ingredientinordertwo = ingredientsinorder.find(eln => eln.ingredient === ingredientinorder);
+              if (ingredientinorder && ingredientinordertwo){
+                ingredientinordertwo.amount += 1;
+                summa = summa + ingredientinorder.price;
+              }else if (ingredientinorder)
+                {let num:TOrderIngredient = {
+                ingredient:ingredientinorder,
+                amount:1};           
+                ingredientsinorder.push(num);
+                summa = summa + ingredientinorder.price;
+              } 
+          }
+       )} 
+       
+       let order:TOrder ={
+        _id: item._id,
+       createdAt: item.createdAt,
+       ingredients: ingredientsinorder,
+       name: item.name,
+       number: item.number,
+       status: item.status,
+       summ: summa,
+       updatedAt: item.updatedAt,
+       };
+
+       orders.push(order);
+     }
+   )}
+  return orders
+}
+
+//****************************************************************** */
+export const selectTotal = (state: RootState) => state.orders.total;
+
+export const selectTotalToday = (state: RootState) => state.orders.totalToday;
+
+//**************************************************************** */
 /*export const getUserMessage = (store) => store.user.isSentMessage;*/
 
 export const getOrderSelector = (store:RootState) =>{
@@ -98,11 +256,12 @@ export const getIngredientsSelectornew = (store:RootState) => {
       console.log(error);
     }
   } else {
-    ingredientList.forEach((item) => {
+      ingredientList.forEach((item) => {
+      
         ingradienstList.push({        
         number: 0,
         id:' 1',
-        ingredient: item.ingredient,
+        ingredient: item,
       });
     });
   }

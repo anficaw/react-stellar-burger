@@ -11,13 +11,21 @@ import { string } from "prop-types";
 function Profile() {
   const dispatch = useAppDispatch();
   const user = useAppSelector(getUserActive);
+  let useremail ='';
+  let username ='';
+
+  if (user) {
+     useremail =user.email;
+     username =user.name;
+    };
   
-  const [email, setEmail] = useState(user.email);
+
+  const [email, setEmail] = useState(useremail);
   const [password, setPassword] = useState('');
-  const [name, setName] = useState(user.name);
+  const [name, setName] = useState(username);
 
   
-
+  
   const setValueEmail = (evt: React.ChangeEvent<HTMLInputElement>) =>{
     setEmail(evt.target.value)
   };
@@ -31,9 +39,11 @@ function Profile() {
   };
 
  const onClickCansel = () =>{
-   setEmail(user.email);
-   setName(user.name)
-       
+  if (user) {
+    setEmail(user.email);
+    setName(user.name);
+   }
+      
  };
 
  const onSubmit = (evt: React.FormEvent) =>{

@@ -4,12 +4,11 @@ import BurgerIngredient from "../burger-ingredient/burger-ingredient";
 import TitleList from "../title-list/title-list";
 
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
-import {  useSelector } from "react-redux";
-import { useAppDispatch,useAppSelector } from "../../types/hook";
+
+import { useAppSelector } from "../../types/hook";
 import {
   getIngredientsSelector,
-  getIngredientSelector,
-} from "../../store/action-selector";
+  } from "../../store/action-selector";
 import { TIngredients } from "../../types";
 
 

@@ -15,7 +15,8 @@ const initialState: OrderState = {
   errorOrder: "",
 };
 
-export const fetchOrder =  createAsyncThunk <string,ТnewBurgerID,{rejectValue:string}> ("order/get", async (newBurgerID) => {
+export const fetchOrder =  createAsyncThunk <string,ТnewBurgerID,{rejectValue:string}> (
+  "order/get", async (newBurgerID) => {
   const res = await getOrder(newBurgerID);
   const data:string = res.order.number;
   return data;
@@ -24,7 +25,13 @@ export const fetchOrder =  createAsyncThunk <string,ТnewBurgerID,{rejectValue:s
 export const orderSlice = createSlice ({
   name: 'order',
   initialState: initialState,
-  reducers:{},
+  reducers:{
+    dellNumber: (state) => {           
+      state.order = '0';
+      state.orderisLoad = false;
+      state.errorOrder = "";
+    }
+  },
   extraReducers: (builder) => {
     builder
        .addCase(fetchOrder.pending, (state) => {
@@ -44,3 +51,4 @@ export const orderSlice = createSlice ({
 
 
 export default orderSlice.reducer;
+export const {dellNumber} = orderSlice.actions;

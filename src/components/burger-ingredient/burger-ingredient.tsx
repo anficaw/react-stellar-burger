@@ -39,7 +39,7 @@ function BurgerIngredient(props:ТBurgerIngredientprops) {
       className={styles.burgerIngredient}
       state={{ background: location }}
       ref={dragRef}
-
+     
     >
       <img
         className={styles.image}

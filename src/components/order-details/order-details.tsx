@@ -6,8 +6,8 @@ import { useAppDispatch,useAppSelector } from "../../types/hook";
 import { getNewBurgerSelector, getOrderSelector} from "../../store/action-selector";
 import { fetchOrder } from "../../store/order-slice";
 import { TNewBurgerConstructor } from "../../types";
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { getOrder } from "../../utils/api";
+import { checkUserAuth, getUser } from "../../store/action";
+
  
 type TOrderDetailstypeprops = {
   one: string,
@@ -18,8 +18,6 @@ type TOrderDetailstypeprops = {
 type ТnewBurgerID = {
   ingredients:string[],};
 
-
-
 function OrderDetails(props:TOrderDetailstypeprops) {
 
   const dispatch = useAppDispatch();
@@ -29,20 +27,34 @@ function OrderDetails(props:TOrderDetailstypeprops) {
     ingredients: newBurgerOrder.newBurgerID,
   };
   
-  console.log('555555555');
-  console.log(newBurgerID);
   useEffect (() => {
-     dispatch(fetchOrder(newBurgerID));
-     
+     dispatch(fetchOrder(newBurgerID));   
+     dispatch(getUser()) 
+
   }, [])
     
-  const newOrder: string = useAppSelector(getOrderSelector); 
+  let newOrderBar: string = `Извините за ожидание,
+                             заказ подтверджается,
+                             не закрывайте окно
+                             до появления номера`; 
+
+   const newOrder = useAppSelector(getOrderSelector);
+
 
   return (
     <section className={styles.orderDetails}>
+      
+
       <p className="mt-30 text text_type_digits-large">{newOrder}</p>
+      {(newOrder ==='0') && (
+                <div className={`${styles.text} text text_type_main-small`}>{newOrderBar}</div>
+                )}
       <p className=" mt-8 mb-15 text text_type_main-medium">{props.one}</p>
-      <img src={icon} alt="Галка" />
+      {(newOrder !=='0') && (
+                 <img src={icon} alt="Галка"  />
+                )}
+      
+   
       <p className=" mt-15 text text_type_main-small">{props.two}</p>
       <p className=" mt-2 mb-30 text text_type_main-default text_color_inactive">
         {props.three}

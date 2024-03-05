@@ -18,7 +18,6 @@ function SingleIngredient() {
   const { ingId } = useParams();
   const dispatch = useAppDispatch();
   
-
   useEffect(() => {
     dispatch(fetchListnew());
   }, []);
@@ -39,8 +38,7 @@ function SingleIngredient() {
       const singl = cardsnew.filter((item) => item.ingredient._id === ingId);
       const ingrad: TIngredient  = singl[0].ingredient;
       return ingrad }
-
-    
+  
   };
   
   const onClose = () => {
@@ -51,16 +49,13 @@ function SingleIngredient() {
     navigate("/"); 
 
  };
-  
+ 
   if (background) {
-
    return (
-      <div>
-        <Main></Main>          
+      <div>        
         <Modal onClose={onClose}>
           <IngredientDetails ingredient= {ingredient()} />
-        </Modal>
-      
+        </Modal>    
       </div>
     );
   } else {
@@ -71,5 +66,5 @@ function SingleIngredient() {
     );
   }
 }
-
 export default SingleIngredient;
+

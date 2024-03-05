@@ -3,7 +3,7 @@ import { getIngredients } from "../utils/api";
 import { TIngredients, TIngredient } from '../types';
 
 type IngredientState = {
-    ingredientList:TIngredients[],
+    ingredientList:TIngredient[],
     isLoad: boolean,
     errorIngr:string,
   }
@@ -16,7 +16,7 @@ const initialState:IngredientState = {
 
 }
 
-export const fetchListnew = createAsyncThunk <TIngredients[],undefined,{rejectValue:string}>(
+export const fetchListnew = createAsyncThunk <TIngredient[],undefined,{rejectValue:string}>(
     'ingredientsnew/get',
     async () => {
       const res = await getIngredients();

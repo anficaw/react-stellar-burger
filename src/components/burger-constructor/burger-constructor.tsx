@@ -11,7 +11,7 @@ import OrderDetails from "../order-details/order-details";
 import BurgerList from "../burger-list/burger-list";
 import { useAppDispatch,useAppSelector } from "../../types/hook";
 
-import { getNewBurgerSelector, getUserActive } from "../../store/action-selector";
+import { getNewBurgerSelector, getUserActive,getUserReg } from "../../store/action-selector";
  
 import {
   addBurger,
@@ -19,6 +19,8 @@ import {
   addBun,
   delIngredient,
 } from "../../store/newburger-slice";
+import {dellNumber} from "../../store/order-slice";
+
 import { useDrop } from "react-dnd";
 
 import { newBurgerone } from "../../utils/data";
@@ -40,6 +42,7 @@ function BurgerConstructor() {
   const newBurgerOrder:TNewBurgerConstructor = useAppSelector(getNewBurgerSelector);
   
   const user = useAppSelector(getUserActive);
+
    
   const NewBurgerCost = newBurgerOrder.newBurgerCost;
 
@@ -48,6 +51,7 @@ function BurgerConstructor() {
 
   const onClose = () => {
     dispatch(addBurger(newBurgerone));
+    dispatch(dellNumber());
     setModalOpen(false);
   };
 
@@ -73,7 +77,6 @@ function BurgerConstructor() {
         setModalErrorOpen(true);
       }else {
         if (user === null) {
-          
           okOne = "Что бы готовить, нам нужно знать для кого ";
           okTwo = "Мы начнем готовить, как только вы авторизуетесь";
           okThree =  <LinLogin

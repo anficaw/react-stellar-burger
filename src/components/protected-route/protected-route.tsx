@@ -6,10 +6,11 @@ import { useAppDispatch,useAppSelector } from "../../types/hook";
 
 type ТProtectedprops = {
   onlyUnAuth:boolean,
-  component:FunctionComponent,
+  component:JSX.Element,
 }
 
-const Protected = (props:ТProtectedprops) => {
+
+const Protected = (props:ТProtectedprops): JSX.Element | null  => {
     
   const isAuthChecked  = useAppSelector((store) => store.user.isAuthChecked);
   const user = useAppSelector((store) => store.user.user);
@@ -31,8 +32,16 @@ const Protected = (props:ТProtectedprops) => {
     
     // Пользователь авторизован, но запрос предназначен только для неавторизованных пользователей
     // Нужно сделать редирект на главную страницу или на тот адрес, что записан в location.state.from
+    
     const { from } = location.state || { from: { pathname: "/" } };
-    return <Navigate to={from} />;
+    
+    if (location.state.from.pathname === "/exit"){
+      return <Navigate to="/" />;
+    }else{
+      return <Navigate to={from} />;
+    }
+
+   
   }
 
   if (!props.onlyUnAuth && !user) {
@@ -40,8 +49,9 @@ const Protected = (props:ТProtectedprops) => {
     return <Navigate to="/login" state={{ from: location }} />;
   }
   // !onlyUnAuth && user
-  return component;
+  return props.component;
 };
 
-export const OnlyAuth = (props) => <Protected onlyUnAuth={false} {...props} />;
-export const OnlyUnAuth = (props) => <Protected onlyUnAuth={true} {...props} />;
+
+export const OnlyAuth = (props:{component:JSX.Element,}) => <Protected onlyUnAuth={false} {...props} />;
+export const OnlyUnAuth = (props:{component:JSX.Element,}) => <Protected onlyUnAuth={true} {...props} />;
