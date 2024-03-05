@@ -1,0 +1,19 @@
+.lineorders {
+  margin: 0;
+  padding: 0;
+  width: 600px;
+  height: 600px;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: start;
+  overflow: scroll;
+  overflow-x: hidden;
+}
+.component {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+
+  list-style-type: none;
+}
