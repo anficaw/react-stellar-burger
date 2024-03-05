@@ -35,11 +35,13 @@ const Protected = (props:ТProtectedprops): JSX.Element | null  => {
     
     const { from } = location.state || { from: { pathname: "/" } };
     
-    if (location.state.from.pathname === "/exit"){
-      return <Navigate to="/" />;
-    }else{
-      return <Navigate to={from} />;
-    }
+
+      if (from.pathname === "/exit"){
+        return <Navigate to="/" />;
+      }else{
+        return <Navigate to={from} />;
+      }
+    
 
    
   }

@@ -4,13 +4,14 @@ import { Input,
 import { login } from "../../store/action";
 import LinLogin from "../../components/link-login/link-login";
 import styles from "./login.module.css";
-import { useDispatch } from "react-redux";
+
+import { useAppDispatch } from "../../types/hook";
 
 function Login() {
  const [email, setEmail] = useState('');
  const [password, setPassword] = useState('');
  
- const dispatch = useDispatch();
+ const dispatch = useAppDispatch();
 
   const setValueEmail = (evt: React.ChangeEvent<HTMLInputElement>) =>{
     setEmail(evt.target.value)
