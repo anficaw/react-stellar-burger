@@ -4,7 +4,6 @@ import ingredientsReducer from "./ingredients-slice";
 import newburgerReducer from "./newburger-slice";
 import ordernewReducer from "./ordernew-slice";
 import orderReducer from "./order-slice";
-import ingredientsReducernew from "./ingredients-slicenew";
 import userReducer from "./user-slice";
 import { socketMiddleware } from "./socketMiddleware";
 import {
@@ -38,7 +37,6 @@ export const initialState = {
     ingredient: {},
     order: 0,
     ordernew:{},
-    ingredientListnew: [],
     user:{},
     orders:{},
     
@@ -46,7 +44,6 @@ export const initialState = {
 const rootReducer = combineReducers({
   ingredient: ingredientReducer,
   ingredients: ingredientsReducer,
-  ingredientsnew: ingredientsReducernew,
   newBurger: newburgerReducer,
   order: orderReducer,
   ordernew: ordernewReducer,

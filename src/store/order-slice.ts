@@ -1,5 +1,5 @@
 import { getOrder } from "../utils/api";
-import { createSlice, PayloadAction,createAsyncThunk} from "@reduxjs/toolkit";
+import { createSlice,createAsyncThunk} from "@reduxjs/toolkit";
 import {ТnewBurgerID} from '../types';
 
 
@@ -19,6 +19,8 @@ export const fetchOrder =  createAsyncThunk <string,ТnewBurgerID,{rejectValue:s
   "order/get", async (newBurgerID) => {
   const res = await getOrder(newBurgerID);
   const data:string = res.order.number;
+  console.log('6666666666666666666');
+  console.log(res);
   return data;
 });
 

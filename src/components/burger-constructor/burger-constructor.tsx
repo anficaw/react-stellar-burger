@@ -10,14 +10,16 @@ import Modal from "../modal/modal";
 import OrderDetails from "../order-details/order-details";
 import BurgerList from "../burger-list/burger-list";
 import { useAppDispatch,useAppSelector } from "../../types/hook";
-
+// @ts-ignore: error message
+import { v4 as uuid } from 'uuid';
 import { getNewBurgerSelector, getUserActive,getUserReg } from "../../store/action-selector";
  
 import {
-  addBurger,
+  
   addIngredient,
   addBun,
   delIngredient,
+  addBurger,
 } from "../../store/newburger-slice";
 import {dellNumber} from "../../store/order-slice";
 
@@ -27,6 +29,7 @@ import { newBurgerone } from "../../utils/data";
 import OrderError from "../order-error/order-error";
 import LinLogin from "../link-login/link-login";
 import { TNewBurgerConstructor,TUser,TIngredients} from "../../types";
+import { checkUserAuth, getUser } from "../../store/action";
  
 
 let ok = "true";
@@ -63,6 +66,7 @@ function BurgerConstructor() {
     okOne = "Идентификатор заказа";
     okTwo = "Ваш заказ начали готовить";
     okThree = "Дождитесь готовности на орбитальной странции";
+    
 
     if (NewBurgerCost === 0) {
       okOne = "Пожалуйста, соберите свой бургер ";
@@ -84,7 +88,11 @@ function BurgerConstructor() {
             qwest="Хотите оформить заказ?" 
             text="Войти"></LinLogin>
           setModalErrorOpen(true);        
-        } else setModalOpen(true);
+        } else {
+          
+          setModalOpen(true);
+          
+        };
 
       }    
     }
@@ -113,7 +121,7 @@ function BurgerConstructor() {
       }
        
       if (addIngredientt.ingredient.ingredient.type !== "bun") {
-         
+        addIngredientt.ingredient.id = uuid();
         dispatch(addIngredient(addIngredientt.ingredient));
       }
 

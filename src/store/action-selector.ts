@@ -11,7 +11,7 @@ export const getUserReg = (store:RootState) => store.user.isAuthChecked;
 export const getOrderNew = (state: RootState) => {
 
   const ordernew = state.ordernew.order;
-  const cardsnew = state.ingredientsnew.ingredientList;
+  const cardsnew = state.ingredients.ingredientList;
   
   
    if (ordernew ===null){
@@ -58,7 +58,7 @@ return order
 //****************************************************************** */
 export const selectUserOrders = (state: RootState) => {
   const listOrder = state.orders.orders;
-  const cardsnew = state.ingredientsnew.ingredientList;
+  const cardsnew = state.ingredients.ingredientList;
   const orders:TOrder[] =[];
   
 
@@ -111,7 +111,7 @@ return orders
 
 export const selectOrders = (state: RootState) => {
     const listOrder = state.orders.orders;
-    const cardsnew = state.ingredientsnew.ingredientList;
+    const cardsnew = state.ingredients.ingredientList;
     const orders:TOrder[] =[];
 
    {listOrder.map((item) => 
@@ -176,6 +176,7 @@ export const getOrderSelector = (store:RootState) =>{
     if (error === "error") {
       console.log(error);
       console.log("какая то ошибка");
+      
     }}
    else {
     console.log("получили");  
@@ -240,31 +241,5 @@ export const getNewBurgerSelector = (store:RootState) => {
   };
   
   return NewBurgerConstructor;
-};
-
-
-export const getIngredientsSelectornew = (store:RootState) => {
-  const error = store.ingredientsnew.errorIngr;
-  const listload = store.ingredientsnew.isLoad;
-  const ingredientList= store.ingredientsnew.ingredientList;
-  
-  const ingradienstList:TIngredients[] = [];
-   
-  if (listload === false) {
-    console.log("Идет загрузка ингредиентов в другое хранилище");
-    if (error === "error") {
-      console.log(error);
-    }
-  } else {
-      ingredientList.forEach((item) => {
-      
-        ingradienstList.push({        
-        number: 0,
-        id:' 1',
-        ingredient: item,
-      });
-    });
-  }
-   return ingradienstList;
 };
 

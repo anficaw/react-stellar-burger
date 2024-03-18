@@ -1,5 +1,5 @@
 import { getOrdernew } from "../utils/api";
-import { createSlice, PayloadAction,createAsyncThunk} from "@reduxjs/toolkit";
+import { createSlice,createAsyncThunk} from "@reduxjs/toolkit";
 import {TlineOrderst, OrderString } from '../types';
 
 

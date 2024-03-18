@@ -1,6 +1,6 @@
 
 import { createSlice, PayloadAction} from "@reduxjs/toolkit";
-import { TIngredients, TIngredient } from '../types';
+import {  TIngredient } from '../types';
 
 type IngredientState = {
     ingredient: TIngredient,

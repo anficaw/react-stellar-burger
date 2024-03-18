@@ -14,7 +14,7 @@ import LayOut from "../layout/layout";
 import SingleIngredient from "../../pages/single-ingredient/single-ingredient";
 import { OnlyAuth, OnlyUnAuth } from "../protected-route/protected-route";
 import OrdersUser from "../../pages/orders-user/orders-user";
-import { checkUserAuth } from "../../store/action";
+import { checkUserAuth, getUser } from "../../store/action";
 import Exit from "../../pages/exit/exit";
 import LayOutProfile from "../layout-profile/layout-profile";
 import ListOrders from "../../pages/list-orders/list-orders";
@@ -28,8 +28,8 @@ function App() {
 
  useEffect(() => {
     dispatch(fetchList());
-    dispatch(checkUserAuth())
-    
+   // dispatch(getUser());
+    dispatch(checkUserAuth()) 
   }, []);
 
   const location = useLocation();
@@ -45,12 +45,9 @@ function App() {
           <Route path="/login" element={<OnlyUnAuth component={<Login />} />} />
           <Route path="/feed" element={<ListOrders />}/>
           <Route path="/feed/:orderId" element={<OneOrder />}/>
-     
-
           <Route path="/profile" element={<OnlyAuth component={<LayOutProfile />} />}>
               <Route path="/profile" element={<Profile />} /> 
-              <Route path="/profile/orders" element={<OrdersUser />}/>   
-              
+              <Route path="/profile/orders" element={<OrdersUser />}/>                
           </Route>
           <Route path="/profile/orders/:orderuserId" element={<OrderUser />}/>
           <Route path="/exit" element={<OnlyAuth component={<Exit />} />} />

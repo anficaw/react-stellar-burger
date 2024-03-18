@@ -10,10 +10,6 @@ function Order(props:TOrderypeprops) {
   
   const orderStr= props.order;
   const list = orderStr.ingredients;
- 
-  console.log('3333333333333333');
-  console.log(orderStr.updatedAt);
-  console.log(new Date(orderStr.updatedAt));
 
    let status = 'Готовится';
     if (orderStr.status ==='done'){

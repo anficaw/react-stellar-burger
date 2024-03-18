@@ -4,6 +4,7 @@ import { wsOpen, wsClose, wsMessage, wsError, wsConnecting } from "./actoins";
 import { IOrder } from "../types/types";
 import { RootState } from "./index";
 
+
 export type OrdersStore = {
   status: WebsocketStatus;
   connectionError: string;
@@ -44,9 +45,3 @@ export const ordersReducer = createReducer(initialState, (builder) => {
       state.totalToday = action.payload.totalToday;
     });
 });
-
-/*export const selectOrders = (state: RootState) => state.orders.orders;
-
-export const selectTotal = (state: RootState) => state.orders.total;
-
-export const selectTotalToday = (state: RootState) => state.orders.totalToday;*/

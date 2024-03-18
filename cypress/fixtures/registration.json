@@ -1,0 +1,7 @@
+{"success": true, 
+"user": {
+    "email": "text@mail.ru", 
+    "name": "olga"}, 
+    "accessToken": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZC…jMzfQ.MV6Ab0SAd6SrhGerSCpD5BcSYEdvS81JtySVLm5kZDM",
+    "refreshToken": "c5ed5ea28fca1d2b2b14a2f21f400f2dc3cda32dcf7f8fd971ca98e2a346c0a9eb8da8fa8ccea527"
+}

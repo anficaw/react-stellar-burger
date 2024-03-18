@@ -9,9 +9,9 @@ import { useAppDispatch,useAppSelector } from "../../types/hook";
 import { registration } from "../../store/action";
 
 function Register() {
-  const [email, setEmail] = useState("anficaw@mail.ru");
-  const [password, setPassword] = useState("****");
-  const [name, setName] = useState("Mark");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [name, setName] = useState("");
 
   const dispatch = useAppDispatch();
 

@@ -47,7 +47,7 @@
   height: 64px;
   width: 64px;
   z-index: 0;
-background-color: rgba(28, 28, 33, 1);
+  background-color: rgba(28, 28, 33, 1);
   border-radius: 100px;
   position: relative;
   border: 2px solid #0c1ccb;

@@ -7,7 +7,7 @@ import Modal from "../../components/modal/modal";
 import { OrderString } from "../../types";
 import Order from "../../components/order/order";
 import { fetchOrdernew } from "../../store/ordernew-slice";
-import { fetchListnew } from "../../store/ingredients-slicenew";
+
 
 function OneOrder() {
   const navigate = useNavigate();
@@ -25,7 +25,7 @@ function OneOrder() {
 
   useEffect(() => {
     dispatch(fetchOrdernew(orderNumber));
-    dispatch(fetchListnew());
+    
   }, []);
 
   const ordernew = useAppSelector(getOrderNew);
@@ -37,11 +37,6 @@ function OneOrder() {
   const onClose = () => {
        navigate("/feed");
       
-  };
-
-  const onBack = () => {
-    navigate(location.state.from.pathname);
-    
   };
 
   if (background) {

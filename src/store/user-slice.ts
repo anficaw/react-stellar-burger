@@ -6,7 +6,8 @@ const initialState: TUser = {
     isAuthChecked: false,
     isSentMessage: false,
   };
-  
+
+   
   export const userSlice = createSlice({
     name: "user",
     initialState: initialState,
@@ -16,6 +17,7 @@ const initialState: TUser = {
       },
       setUser: (state, action:PayloadAction<TUserone|null>) => {
         state.user = action.payload;
+        
       },
       setSentMessage: (state, action:PayloadAction<boolean>) => {
         state.isSentMessage = action.payload;

@@ -36,7 +36,7 @@ const initialState:NewBurgerState = {
             ingredients: [
               { 
                 number: 0,
-                id: uuid(),
+                id: '548',
                 ingredient:
               {
                 _id: "643d69a5c3f7b9001cfa0941n",
@@ -59,7 +59,6 @@ const initialState:NewBurgerState = {
           }
     };
     
-
 const newBurgerSlice = createSlice({
     name: 'newBurger',
     initialState: initialState,
@@ -68,7 +67,7 @@ const newBurgerSlice = createSlice({
             state.newBurger = action.payload;},
         addIngredient: (state, action:PayloadAction<TIngredients>) => {     
           const ingred = action.payload;
-          ingred.id = uuid();
+          //ingred.id = uuid();
           state.newBurger.ingredients.push(ingred);
         },   
         addBun: (state, action:PayloadAction<TIngredient>) => {         

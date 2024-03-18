@@ -44,7 +44,6 @@ const fetchwithRefresh = async (url:string, options:any) => {
       if (!refreshData.success) {
         return Promise.reject(refreshData);
       }
-      
       localStorage.setItem("accessToken", refreshData.accessToken);
       localStorage.setItem("refreshToken", refreshData.refreshToken);
       console.log("Получили токен");
@@ -135,6 +134,7 @@ export const registration = (email:string, password:string , name:string ) => {
           console.log("Получили токен");
           console.log(res.refreshToken);
           console.log(res.accessToken);
+          console.log(res);
           useAppDispatch(setUser(res.user));
         } else {
           return Promise.reject("Ошибка данных с скервера");
@@ -294,8 +294,7 @@ export const resetPass = (code:string, password:string) => {
 export const checkUserAuth = () => {
   return (useAppDispatch:AppDispath) => {
     if (localStorage.getItem("accessToken")) {
-      useAppDispatch(getUser())
-        /*.catch((error) => {*/
+       useAppDispatch(getUser())        
         .catch(() => {
           localStorage.removeItem("accessToken");
           localStorage.removeItem("refreshToken");

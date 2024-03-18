@@ -7,7 +7,6 @@ import Modal from "../../components/modal/modal";
 import { OrderString } from "../../types";
 import Order from "../../components/order/order";
 import { fetchOrdernew } from "../../store/ordernew-slice";
-import { fetchListnew } from "../../store/ingredients-slicenew";
 
 function OrderUser() {
   const navigate = useNavigate();
@@ -25,7 +24,7 @@ function OrderUser() {
 
   useEffect(() => {
     dispatch(fetchOrdernew(orderNumber));
-    dispatch(fetchListnew());
+    
   }, []);
 
   const ordernew = useAppSelector(getOrderNew);
@@ -37,11 +36,6 @@ function OrderUser() {
   const onClose = () => {
        navigate("/profile/orders");
       
-  };
-
-  const onBack = () => {
-    navigate("/profile/orders");
-    
   };
 
   if (background) {
