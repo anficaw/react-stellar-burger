@@ -6,7 +6,7 @@ type IngredientState = {
     ingredient: TIngredient,
 }
 
-const initialState: IngredientState = {
+export const initialState: IngredientState = {
     ingredient:
         {_id: "643d69a5c3f7b9001cfa0941n",
         name: "Тут будет ваша котлета,соус и многое другое",

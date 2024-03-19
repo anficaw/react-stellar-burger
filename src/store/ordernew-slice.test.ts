@@ -1,12 +1,8 @@
 import ordernewSlice from "./ordernew-slice";
+import {initialState} from "./ordernew-slice";
+
 import {orderStr} from "../utils/data";
 
- 
-  const initialState = {
-    order: null,
-    orderisLoad: false,
-    errorOrder: "",
-  };
 
 describe('orderSlice', () =>{
     it('panding test', () =>{

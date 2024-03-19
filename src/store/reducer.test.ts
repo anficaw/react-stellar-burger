@@ -1,15 +1,10 @@
 import { ordersReducer } from "./reducer";
+import { initialState } from "./reducer";
 import { wsOpen, wsClose, wsMessage, wsError, wsConnecting } from "./actoins";
 import { WebsocketStatus } from "../types/types";
 import { report } from "../utils/data";
 
-const initialState = {
-  status: WebsocketStatus.OFFLINE,
-  connectionError: "",
-  orders: [],
-  total: 0,
-  totalToday: 0,
-};
+
 
 describe("Test ordersReducer", () => {
   it("wsConnecting test", () => {

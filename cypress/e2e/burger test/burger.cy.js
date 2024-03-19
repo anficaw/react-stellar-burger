@@ -1,6 +1,7 @@
 describe("Test constructor", () =>{
     beforeEach(function (){
-        cy.visit('http://localhost:3000');
+        const testUrl = 'http://localhost:3000';
+        cy.visit(testUrl);
         cy.viewport(1300, 800)
         cy.intercept('GET','api/ingredients',{fixture:'ingredient.json'});
         cy.intercept('POST','api/auth/register',{fixture:'registration.json'});
@@ -12,24 +13,27 @@ describe("Test constructor", () =>{
     afterEach(function (){
         cy.clearLocalStorage();
     })
-
+    const modal = '[class^=modal]';
+    const modaldel = '[class^=modal_closeIcon]';
+    const burger = '[class^=burger-constructor_burgerconstructor_]';
+        
     it ('Open modal ingredient', () =>{   
          cy.get('a').contains('булка').click();
-         cy.get('[class^=modal]').contains("Детали ингредиента").should("exist");
-         cy.get('[class^=modal]').contains("Краторная булка").should("exist");
-         cy.get('[class^=modal_closeIcon]').click();
+         cy.get(modal).contains("Детали ингредиента").should("exist");
+         cy.get(modal).contains("Краторная булка").should("exist");
+         cy.get(modaldel).click();
 
    });
 
    it ('Test draganddrop and order', () =>{   
 
         cy.get('a').contains('булка').trigger('dragstart');
-        cy.get('[class^=burger-constructor_burgerconstructor_]').first().trigger('drop');
-        cy.get('[class^=burger-constructor_burgerconstructor_]').contains("булка").should("exist");
+        cy.get(burger).first().trigger('drop');
+        cy.get(burger).contains("булка").should("exist");
 
         cy.get('a').contains('Люминесцентного').trigger('dragstart');
-        cy.get('[class^=burger-constructor_burgerconstructor_]').first().trigger('drop');
-        cy.get('[class^=burger-constructor_burgerconstructor_]').contains("Люминесцентного").should("exist");
+        cy.get(burger).first().trigger('drop');
+        cy.get(burger).contains("Люминесцентного").should("exist");
 
         cy.get('button').contains('Оформить').click();
 
@@ -43,14 +47,11 @@ describe("Test constructor", () =>{
 
         cy.get('button').contains('Оформить заказ').click();
 
-        cy.get('[class^=modal_closeIcon]',{ timeout: 25000 }).should("exist");
-        cy.get('[class^=modal]').contains("Идентификатор заказа").should("exist");
+        cy.get(modaldel,{ timeout: 25000 }).should("exist");
+        cy.get(modal).contains("Идентификатор заказа").should("exist");
 
-       cy.get('[class^=modal_closeIcon]').click();
+       cy.get(modaldel).click();
         
-
-    });
-    
-    
+    }); 
     
 });

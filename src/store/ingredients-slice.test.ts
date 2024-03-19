@@ -1,11 +1,6 @@
 import ingredientsSlice from "./ingredients-slice";
+import {initialState} from "./ingredients-slice";
 
-const initialState = {
-    ingredientList: [],
-    isLoad: false,
-    errorIngr:'',
-
-}
 
 const list = [
     {
@@ -44,7 +39,7 @@ const list = [
 
 describe('Test ingredientsSlice', () =>{
     it('panding test', () =>{
-        expect (ingredientsSlice( initialState, {
+        expect (ingredientsSlice(initialState, {
             type: "ingredients/get/pending",
 
         })).toEqual({
@@ -103,7 +98,7 @@ describe('Test ingredientsSlice', () =>{
             isLoad: false,
             errorIngr:'error',
         })
-        
+
         
     })
 

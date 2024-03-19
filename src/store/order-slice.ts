@@ -9,7 +9,7 @@ type OrderState = {
   errorOrder: string,
 }
 
-const initialState: OrderState = {
+export const initialState: OrderState = {
   order: '0',
   orderisLoad: false,
   errorOrder: "",

@@ -8,7 +8,7 @@ type IngredientState = {
     errorIngr:string,
   }
 
-  const initialState:IngredientState = {
+  export const initialState:IngredientState = {
     ingredientList: [],
     isLoad: false,
     errorIngr:'',

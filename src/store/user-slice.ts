@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction} from "@reduxjs/toolkit";
 import { TUser, TUserone} from "../types";
 
-const initialState: TUser = {
+export const initialState: TUser = {
     user: null,
     isAuthChecked: false,
     isSentMessage: false,

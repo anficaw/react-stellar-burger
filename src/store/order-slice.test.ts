@@ -1,26 +1,21 @@
 import orderSlice from "./order-slice";
+import {initialState} from "./order-slice";
 
-
-const orderState = {
-    order: 'string',
-    orderisLoad: false,
-    errorOrder: 'string',
-  }
 
   const orderStr = "35874";
 
 describe('orderSlice', () =>{
     it('panding test', () =>{
-        expect (orderSlice( orderState, {
+        expect (orderSlice( initialState, {
             type: "order/get/pending",
 
         })).toEqual({
-            order: 'string',
+            order: '0',
             orderisLoad: false,
             errorOrder: '',
         })
 
-        expect (orderSlice( undefined, {
+        expect (orderSlice( initialState, {
             type: "order/get/pending",
 
         })).toEqual({
@@ -31,14 +26,14 @@ describe('orderSlice', () =>{
     })
 
     it('fulfilled test', () =>{
-        expect (orderSlice( orderState, {
+        expect (orderSlice( initialState, {
             type: "order/get/fulfilled",
             payload: orderStr
 
         })).toEqual({
             order: orderStr,
             orderisLoad: true,
-            errorOrder: 'string',
+            errorOrder: '',
         })
 
         expect (orderSlice( undefined, {
@@ -55,10 +50,10 @@ describe('orderSlice', () =>{
     })
 
     it('rejected test', () =>{
-        expect (orderSlice( orderState, {
+        expect (orderSlice( initialState, {
             type: "order/get/rejected",            
         })).toEqual({
-            order: 'string',
+            order: '0',
             orderisLoad: false,
             errorOrder: "error",
         })

@@ -364,9 +364,8 @@ export const data = [
   },
 ];
 
-export const newBurgerone = {
-  bun: {
-    number: 0,
+export const BUN = {
+  number: 0,
     ingredientbun: {
       _id: "643d69a5c3f7b9001cfa093cn",
       name: "тут будет  ваша   булка       ",
@@ -381,27 +380,33 @@ export const newBurgerone = {
       image_large: "https://code.s3.yandex.net/react/code/bun-02-large.png",
       __v: 0,
     },
-  },
-  ingredients: [
-    {
-      number: 0,
-      id: uuid(),
-      ingredient: {
-        _id: "643d69a5c3f7b9001cfa0941n",
-        name: "Тут будет ваша котлета,соус и многое другое",
-        type: "main",
-        proteins: 420,
-        fat: 142,
-        carbohydrates: 242,
-        calories: 4242,
-        price: 0,
-        image: "https://code.s3.yandex.net/react/code/meat-01.png",
-        image_mobile:
-          "https://code.s3.yandex.net/react/code/meat-01-mobile.png",
-        image_large: "https://code.s3.yandex.net/react/code/meat-01-large.png",
-        __v: 0,
-      },
+};
+
+export const INGREDIENT = 
+  {
+    number: 0,
+    id: "874",
+    ingredient: {
+      _id: "643d69a5c3f7b9001cfa0941n",
+      name: "Тут будет ваша котлета,соус и многое другое",
+      type: "main",
+      proteins: 420,
+      fat: 142,
+      carbohydrates: 242,
+      calories: 4242,
+      price: 0,
+      image: "https://code.s3.yandex.net/react/code/meat-01.png",
+      image_mobile:
+        "https://code.s3.yandex.net/react/code/meat-01-mobile.png",
+      image_large: "https://code.s3.yandex.net/react/code/meat-01-large.png",
+      __v: 0,
     },
+  };
+
+export const newBurgerone = {
+  bun: BUN,
+  ingredients: [
+    INGREDIENT,
   ],
 };
 

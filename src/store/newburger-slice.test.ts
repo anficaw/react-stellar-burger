@@ -1,5 +1,6 @@
 import newBurgerSlice from "./newburger-slice";
-import { newBurgerone } from "../utils/data";
+import {initialState} from "./newburger-slice";
+import { BUN, INGREDIENT, newBurgerone } from "../utils/data";
 import {
   addBurger,
   delIngredient,
@@ -9,49 +10,6 @@ import {
 } from "./newburger-slice";
 
 
-const initialState = {
-  newBurger: {
-    bun: {
-      number: 0,
-      ingredientbun: {
-        _id: "643d69a5c3f7b9001cfa093cn",
-        name: "тут будет  ваша   булка       ",
-        type: "bun",
-        proteins: 80,
-        fat: 24,
-        carbohydrates: 53,
-        calories: 420,
-        price: 0,
-        image: "https://code.s3.yandex.net/react/code/bun-02.png",
-        image_mobile: "https://code.s3.yandex.net/react/code/bun-02-mobile.png",
-        image_large: "https://code.s3.yandex.net/react/code/bun-02-large.png",
-        __v: 0,
-      },
-    },
-    ingredients: [
-      {
-        number: 0,
-        id: "548",
-        ingredient: {
-          _id: "643d69a5c3f7b9001cfa0941n",
-          name: "Тут будет ваша котлета,соус и многое другое",
-          type: "main",
-          proteins: 420,
-          fat: 142,
-          carbohydrates: 242,
-          calories: 4242,
-          price: 0,
-          image: "https://code.s3.yandex.net/react/code/meat-01.png",
-          image_mobile:
-            "https://code.s3.yandex.net/react/code/meat-01-mobile.png",
-          image_large:
-            "https://code.s3.yandex.net/react/code/meat-01-large.png",
-          __v: 0,
-        },
-      },
-    ],
-  },
-};
 
 const initialStatebun = {
     newBurger: {
@@ -73,70 +31,16 @@ const initialStatebun = {
         },
       },
       ingredients: [
-        {
-          number: 0,
-          id: "548",
-          ingredient: {
-            _id: "643d69a5c3f7b9001cfa0941n",
-            name: "Тут будет ваша котлета,соус и многое другое",
-            type: "main",
-            proteins: 420,
-            fat: 142,
-            carbohydrates: 242,
-            calories: 4242,
-            price: 0,
-            image: "https://code.s3.yandex.net/react/code/meat-01.png",
-            image_mobile:
-              "https://code.s3.yandex.net/react/code/meat-01-mobile.png",
-            image_large:
-              "https://code.s3.yandex.net/react/code/meat-01-large.png",
-            __v: 0,
-          },
-        },
+        INGREDIENT
       ],
     },
   };
 
 const initialStateadd = {
     newBurger: {
-      bun: {
-        number: 0,
-        ingredientbun: {
-          _id: "643d69a5c3f7b9001cfa093cn",
-          name: "тут будет  ваша   булка       ",
-          type: "bun",
-          proteins: 80,
-          fat: 24,
-          carbohydrates: 53,
-          calories: 420,
-          price: 0,
-          image: "https://code.s3.yandex.net/react/code/bun-02.png",
-          image_mobile: "https://code.s3.yandex.net/react/code/bun-02-mobile.png",
-          image_large: "https://code.s3.yandex.net/react/code/bun-02-large.png",
-          __v: 0,
-        },
-      },
+      bun: BUN,
       ingredients: [
-        {
-          number: 0,
-          id: "548",
-          ingredient: {
-            _id: "643d69a5c3f7b9001cfa0941n",
-            name: "Тут будет ваша котлета,соус и многое другое",
-            type: "main",
-            proteins: 420,
-            fat: 142,
-            carbohydrates: 242,
-            calories: 4242,
-            price: 0,
-            image: "https://code.s3.yandex.net/react/code/meat-01.png",
-            image_mobile:
-              "https://code.s3.yandex.net/react/code/meat-01-mobile.png",
-            image_large:
-              "https://code.s3.yandex.net/react/code/meat-01-large.png",
-            __v: 0,
-          },
-        },
+        INGREDIENT,
         {
             number: 0,
             id: "550",

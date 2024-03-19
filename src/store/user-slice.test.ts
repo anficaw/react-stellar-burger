@@ -1,11 +1,6 @@
 import userSlice from "./user-slice";
-import {setAuthChecked,setUser, setSentMessage} from "./user-slice";
+import {setAuthChecked,setUser, setSentMessage, initialState} from "./user-slice";
 
-const initialState = {
-    user: null,
-    isAuthChecked: false,
-    isSentMessage: false,
-  };
 
   const Userone = {
     name: "Olga",
