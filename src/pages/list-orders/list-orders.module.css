@@ -1,0 +1,31 @@
+.listorders {
+    margin: 0;
+    margin-top: 100px;
+    width: 1280px;
+    height: 770px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center; 
+
+}
+
+.main {
+    max-width: 1280px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .mainSection {
+    width: 600px;
+  }
+  
+  .main-section:nth-child(2) {
+    width: 640px;
+  }
+  
+  .heading {
+    max-width: 1280px;
+    margin: 40px auto 20px;
+  }
